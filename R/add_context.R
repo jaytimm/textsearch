@@ -1,20 +1,21 @@
 #' Add context to search results
 #'
 #' @name add_context
-#' @param x output from find_gramx()
-#' @param annotation Annotion dataframe
+#' @param gramx output from find_gramx()
+#' @param df Annotion dataframe
+#' @param highlight A boolean
 #' @return A data frame
 #'
 #' @export
 #' @rdname add_context
 #'
 
-add_context <- function(x, ## output from find_gramx()
-                        annotation,
+add_context <- function(gramx, ## output from find_gramx()
+                        df,
                         highlight = NULL) {
 
-  data.table::setDT(annotation)
-  y <- subset(annotation, doc_id %in% unique(x$doc_id))
+  data.table::setDT(df)
+  y <- subset(df, doc_id %in% unique(gramx$doc_id))
 
   #### assume column here -- needs parameter --
   y[, inline := paste0(tag, '_', token, ' ')]
@@ -25,7 +26,7 @@ add_context <- function(x, ## output from find_gramx()
 
   ## x2 <- x[y, on = c('doc_id', 'beg')]
 
-  x1 <- y[x, on = c('doc_id', 'beg')]
+  x1 <- y[gramx, on = c('doc_id', 'beg')]
 
   x2 <- x1[, c('construction',
                'doc_id',
