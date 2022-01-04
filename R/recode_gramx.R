@@ -2,6 +2,7 @@
 #'
 #' @name recode_gramx
 #' @param df An annotated corpus df
+#' @param gramx A DF
 #' @param col A string
 #' @param new_cat A string
 #' @param renumber A boolean
@@ -11,43 +12,54 @@
 #' @rdname recode_gramx
 #'
 
-recode_gramx <- function(df, 
-                         gramx,
-                         # search, ## will need to add translator in below code -- 
-                         # mapping,
-                         col = 'xpos', 
-                         new_cat = 'jrb', 
+recode_gramx <- function(gramx,
+                         df,
+                         form = 'token',
+                         tag = 'xpos',
+                         col = 'xpos',
+                         new_cat = 'cx1',
                          renumber = T){
-  
-  ### a found object and DF -- as parameters -- 
-  
-  ### modify search output -- 
-  f0 <- data.table::rbindlist(gramx, idcol='doc_id', use.names = F)
+
+
+  data.table::setDT(df)
+  df[, inline := paste0(get(tag), '~', get(form), ' ')]
+  df[, end := cumsum(nchar(inline)), by = list(doc_id)]
+  df[, start := c(1, end[1:(length(end)-1)] + 1),
+    by = list(doc_id)]
+
+  ### modify search output --
+  f0 <- gramx
+
   f0[, id := seq_len(.N), by = doc_id]
   f0 <- df[, c('doc_id', 'start', 'term_id')][f0, on = c('doc_id', 'start')]
-  
-  f1 <- f0[, .(token = unlist(data.table::tstrsplit(construction, " "))), 
+
+  f1 <- f0[, .(token = unlist(data.table::tstrsplit(construction, " "))),
            by = list(doc_id, term_id, id, construction)]
   f1[, term_id2 := term_id]
   f1[, term_id := term_id + seq_len(.N) - 1, by = list(doc_id, term_id)]
   f1[, c('token', 'id') := NULL]
-  
-  ### add df -- 
+
+  ### add df --
   f10 <- f1[df, on = c('doc_id', 'term_id')]
   f10[, term_id2 := ifelse(is.na(term_id2), term_id, term_id2)]
   f100 <- f10[f10[, .I[1], list (doc_id, term_id2)]$V1]
-  
+
   ## LASTLY -- need to re-assign token and lemma columns to construction --
   f100[, (col) := ifelse(!is.na(construction), new_cat, get(col))]
-  
+
   ## IF re-number
   f100[, term_id := seq_len(.N), by = doc_id]
   f100[, token_id := seq_len(.N), by = list(doc_id, sentence_id)]
-  
-  ## Assign value -- 
-  f100[, token := ifelse(!is.na(construction), construction, token)]
-  f100[, lemma := ifelse(!is.na(construction), construction, lemma)]
-  
+
+  ## Assign value --
+  # x3[, pattern := trimws(gsub('[A-Z]+_', '', construction))]
+  f100[, token := ifelse(!is.na(construction),
+                         gsub(' ', '_',
+                              trimws(gsub('[A-Z_]+~', '', construction))
+                              ),
+                         token)]
+  f100[, lemma := ifelse(!is.na(construction), token, lemma)]
+
   ## return -- what -- ??
   return(f100)
 }

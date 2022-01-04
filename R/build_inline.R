@@ -1,9 +1,9 @@
 #' Build inline tif for search gramx
 #'
 #' @name build_inline
-#' @param doc_id vector
+#' @param df A data frame
 #' @param form vector
-#' @param pos vector
+#' @param tag vector
 #' @return A data frame
 #'
 #' @export
@@ -11,10 +11,10 @@
 #'
 #'
 
-build_inline <- function(doc_id, form, pos){
+build_inline <- function(df, form, tag){
 
-  x <- data.table::data.table(doc_id, form, pos)
-  x[, inline := paste0(pos, '_', form, ' ')] #### ---
+  x <- data.table::data.table(df)
+  x[, inline := paste0(get(tag), '~', get(form), ' ')] #### ---
   x[, list(text = paste0(inline, collapse = "")),
     by = list(doc_id)]
 }

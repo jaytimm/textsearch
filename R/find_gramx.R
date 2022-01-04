@@ -3,13 +3,12 @@
 #' @name find_gramx
 #' @param tif a tif
 #' @param search char string
-#' @param mapping a list
 #' @return A data frame
 #'
 #' @export
 #' @rdname find_gramx
 #'
-find_gramx <- function(tif, ## a tif with inline tags --
+find_gramx <- function(tif,
                        query) {
 
   # q1 <- build_search(search, mapping = mapping)
@@ -18,9 +17,9 @@ find_gramx <- function(tif, ## a tif with inline tags --
   # inline <- df[, list(text = paste0(token, collapse = " ")),
   #              by = list(doc_id)]
 
-  found <- lapply(1:nrow(x), function(z) {
+  found <- lapply(1:nrow(tif), function(z) {
 
-    txt <- x$text[z]
+    txt <- tif$text[z]
     locations <- gregexpr(pattern = query,
                           text = txt, #,
                           ignore.case = TRUE)
@@ -34,7 +33,7 @@ find_gramx <- function(tif, ## a tif with inline tags --
                  end = end) }
   })
 
-  names(found) <- x$doc_id
+  names(found) <- tif$doc_id
   found <- Filter(length, found)
   data.table::rbindlist(found, idcol='doc_id', use.names = F)
 }
