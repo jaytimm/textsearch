@@ -1,4 +1,4 @@
-## linguistic features
+## textsearch
 
 ``` r
 library(tidyverse)
@@ -8,18 +8,15 @@ library(tidyverse)
 
 ``` r
 rss1 <- lapply(c('economy', 
-                 'covid', 
                  'biden', 
-                 'depression', 
-                 'merkel', 
-                 'trump', 
                  'jobs'),
                
                quicknews::qnews_build_rss)
 
-meta <- lapply(unlist(rss1), quicknews::qnews_strip_rss)
-meta <- data.table::rbindlist(meta)
-meta <- unique(meta)
+meta <- lapply(unlist(rss1), 
+               quicknews::qnews_strip_rss) %>%
+  bind_rows() %>% 
+  distinct()
 
 news <- quicknews::qnews_extract_article(url = meta$link[1:100], 
                                          cores = 7) %>% 
@@ -109,13 +106,13 @@ f_sentence <- lxfeatures::add_context(gramx = found,
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                                      | text                                                                                                                                                                                                                                                                                                                                                      |
-|:-------|------------:|:--------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 11     |          77 | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | That changed abruptly in 2021 , for reasons `involving the economic dynamics` discussed above .                                                                                                                                                                                                                                                           |
-| 89     |         107 | VBG\~exceeding DT\~the JJ\~total NN\~amount       | This is the amount of money US companies paid in ransom in the first half of 2021 , `exceeding the total amount` paid in 2020 by 42 percent .                                                                                                                                                                                                             |
-| 5      |          30 | VBG\~suppressing DT\~the JJ\~initial NN\~wave     | Even if the U.S. economy does get through the Omicron wave relatively unscathed , with few or no lockdowns , the new variant could affect production in the Chinese economy , which supplies many components and finished goods to the U.S. China just recorded the largest number of weekly cases since `suppressing the initial wave` of the pandemic . |
-| 80     |          14 | VBG\~raising DT\~the JJ\~median NN\~salary        | McKinney said the main focus for the NEDC is `raising the median salary` , subsequently creating a ripple effect through the local economy .                                                                                                                                                                                                              |
-| 19     |           2 | VBG\~plaguing DT\~the JJ\~entire NN\~world        | The uncertainties `plaguing the entire world` are enormous .                                                                                                                                                                                                                                                                                              |
+| doc_id | sentence_id | construction                                   | text                                                                                                                                                                                                                                                                                                       |
+|:-------|------------:|:-----------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 43     |          43 | VBG\~ending DT\~the JJ\~abusive NN\~practice   | Arguably , the regulator that gig companies most fear is the Labor Department , which has said it’s “ committed to `ending the abusive practice` of misclassifying employees as independent contractors , which deprives these workers of critical protections and benefits . ”                            |
+| 80     |          14 | VBG\~raising DT\~the JJ\~median NN\~salary     | McKinney said the main focus for the NEDC is `raising the median salary` , subsequently creating a ripple effect through the local economy .                                                                                                                                                               |
+| 80     |          64 | VBG\~prohibiting DT\~the JJ\~free NN\~exercise | First Amendment : Congress shall make no law respecting an establishment of religion , or `prohibiting the free exercise` thereof ; or abridging the freedom of speech , or of the press ; or the right of the people peaceably to assemble , and to petition the Government for a redress of grievances . |
+| 89     |         107 | VBG\~exceeding DT\~the JJ\~total NN\~amount    | This is the amount of money US companies paid in ransom in the first half of 2021 , `exceeding the total amount` paid in 2020 by 42 percent .                                                                                                                                                              |
+| 75     |          41 | VBG\~delivering DT\~the JJ\~full NNS\~gains    | They see the economy showing signs of what liberal economists have long said is the recipe for `delivering the full gains` of economic growth to low-paid and middle-class workers , even after factoring in rising prices .                                                                               |
 
 ### Recode constructions – per annotated DF –
 
@@ -167,8 +164,32 @@ University Press.
 ### Lexical features
 
 ``` r
+# data.table::setDT(anno)
 anno[, biber := lxfeatures::biber_tags(token = anno$token, tag = anno$xpos)]
 ```
+
+Eg:
+
+``` r
+anno %>% 
+  select(doc_id, sentence_id, token, 
+         xpos, biber) %>%
+  slice(1:10) %>%
+  knitr::kable()
+```
+
+| doc_id | sentence_id | token         | xpos | biber |
+|:-------|------------:|:--------------|:-----|:------|
+| 1      |           1 | The           | DT   | ART   |
+| 1      |           1 | economic      | JJ   | JJ    |
+| 1      |           1 | numbers       | NNS  | NNS   |
+| 1      |           1 | that          | IN   | DEM   |
+| 1      |           1 | government    | NN   | NN    |
+| 1      |           1 | statisticians | NNS  | NNS   |
+| 1      |           1 | routinely     | RB   | RB    |
+| 1      |           1 | produce       | VB   | VB    |
+| 1      |           1 | matter        | NN   | NN    |
+| 1      |           1 | .             | .    | CLP   |
 
 ### Lexico-grammatical features
 

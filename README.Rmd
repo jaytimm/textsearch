@@ -5,7 +5,7 @@ output:
 ---
 
 
-## linguistic features
+## textsearch
 
 
 ```{r eval=FALSE, include=FALSE}
@@ -35,18 +35,15 @@ library(tidyverse)
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE}
 rss1 <- lapply(c('economy', 
-                 'covid', 
                  'biden', 
-                 'depression', 
-                 'merkel', 
-                 'trump', 
                  'jobs'),
                
                quicknews::qnews_build_rss)
 
-meta <- lapply(unlist(rss1), quicknews::qnews_strip_rss)
-meta <- data.table::rbindlist(meta)
-meta <- unique(meta)
+meta <- lapply(unlist(rss1), 
+               quicknews::qnews_strip_rss) %>%
+  bind_rows() %>% 
+  distinct()
 
 news <- quicknews::qnews_extract_article(url = meta$link[1:100], 
                                          cores = 7) %>% 
@@ -199,9 +196,20 @@ From: Biber, D. (1988). *Variation across speech and writing*. Cambridge Univers
 ### Lexical features
 
 ```{r message=FALSE, warning=FALSE}
+# data.table::setDT(anno)
 anno[, biber := lxfeatures::biber_tags(token = anno$token, tag = anno$xpos)]
 ```
 
+
+Eg:
+
+```{r}
+anno %>% 
+  select(doc_id, sentence_id, token, 
+         xpos, biber) %>%
+  slice(1:10) %>%
+  knitr::kable()
+```
 
 
 
