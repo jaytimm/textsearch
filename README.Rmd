@@ -1,0 +1,234 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+
+## linguistic features
+
+
+```{r eval=FALSE, include=FALSE}
+*Biber blog post* -- 
+
+https://linguisticswithacorpus.wordpress.com/2021/12/22/corpus-linguistics-is-for-text-lovers%EF%BF%BC/
+
+
+*EXCELLENT Jack Grieve resources* ::
+
+https://rpubs.com/jwgrieve/340342
+https://aclanthology.org/W17-3001.pdf
+
+
+> Need to create a list of MWE from Biber -- 
+
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+
+
+
+## Build a corpus from current news
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+rss1 <- lapply(c('economy', 
+                 'covid', 
+                 'biden', 
+                 'depression', 
+                 'merkel', 
+                 'trump', 
+                 'jobs'),
+               
+               quicknews::qnews_build_rss)
+
+meta <- lapply(unlist(rss1), quicknews::qnews_strip_rss)
+meta <- data.table::rbindlist(meta)
+meta <- unique(meta)
+
+news <- quicknews::qnews_extract_article(url = meta$link[1:100], 
+                                         cores = 7) %>% 
+  left_join(meta) %>%
+  mutate(doc_id = row_number() )
+```
+
+
+
+```{r eval=FALSE, include=FALSE}
+# setwd('/home/jtimm/Desktop')
+# saveRDS(news, 'tif.rds')
+```
+
+
+
+## Annotate corpus 
+
+```{r include=FALSE}
+locald <- '/home/jtimm/pCloudDrive/GitHub/packages/biberizer/model'
+```
+
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+setwd(locald)
+udmodel <- udpipe::udpipe_load_model('english-ewt-ud-2.3-181115.udpipe')
+
+anno <- news %>% 
+  text2df::tif2sentence() %>%
+  text2df::tif2token() %>%
+  #text2df::token2mwe(mwe = MWE) %>%
+  text2df::token2annotation(model = udmodel)
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# setwd('/home/jtimm/Desktop')
+# saveRDS(anno, 'anno.rds')
+
+setwd('/home/jtimm/Desktop')
+anno <- readRDS('anno.rds')
+tif <- readRDS('tif.rds')
+```
+
+
+
+
+## Search process -- 
+
+### Build inline TIF
+
+
+```{r}
+inline_tif <- lxfeatures::build_inline(df = anno, 
+                           form = 'token', 
+                           tag = 'xpos')
+```
+
+
+
+### Optionally set tag mappings
+
+```{r}
+generic_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
+                         N = c('NN', 'NNP', 'NNPS', 'NNS'),
+                         ADJ = c('JJ', 'JJR', 'JJS'),
+                         ADV = c('RB', 'RBR', 'RBS')
+                         )
+```
+
+
+
+### Build inline query 
+
+```{r}
+## f18 = 'BE (ADV)* VBN by'
+search <- lxfeatures::translate_query(x = 'VBG the ADJ N', mapping = generic_mapping)
+
+search
+```
+
+
+
+
+### Identify - extract grammatical constructions -- 
+
+```{r}
+found <- lxfeatures::find_gramx(tif = inline_tif, query = search)
+
+found %>% head() %>% knitr::kable()
+```
+
+
+
+### Add sentential context to a `gramx` object --
+
+```{r}
+f_sentence <- lxfeatures::add_context(gramx = found,
+                          df = anno,
+                          form = 'token', 
+                          tag = 'xpos',
+                          highlight = '`')
+
+f_sentence %>% sample_n(5) %>% knitr::kable()
+```
+
+
+
+
+### Recode constructions -- per annotated DF --
+
+```{r}
+simple_np <- '(DT)?(ADJ|N)+(N)+'
+
+search_np <- lxfeatures::translate_query(x = simple_np, mapping = generic_mapping)
+```
+
+
+
+```{r}
+found0 <- lxfeatures::find_gramx(tif = inline_tif, query = search_np)
+
+new_anno <- lxfeatures::recode_gramx(df = anno,
+                         gramx = found0,
+                         form = 'token', 
+                         tag = 'xpos',
+                         col = 'xpos',
+                         new_cat = 'NPhrase',
+                         renumber = T
+                         )
+```
+
+
+
+## Some Biber (1988) odds/ends -- 
+
+From: Biber, D. (1988). *Variation across speech and writing*. Cambridge University Press.
+
+### Lexical features
+
+```{r}
+anno[, biber := lxfeatures::biber_tags(token = anno$token, tag = anno$xpos)]
+```
+
+
+
+
+### Lexico-grammatical features
+
+```{r}
+biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
+                       N = c('NN', 'NNP', 'NNPS', 'NNS'),
+                       ADJ = c('JJ', 'JJR', 'JJS'),
+                       ADV = c('RB', 'RBR', 'RBS'),
+                       AUX = c('MODAL', 'HAVE', 'BE', 'DO', 'S'),
+                       PRO = c('SUBJPRO', 'OBJPRO', 
+                               'POSSPRO', 'REFLEXPRO', 
+                               'YOU', 'HER', 'IT'),
+                       DET = c('ART', 'DEM', 'QUAN', 'NUM'),
+                       ALLP = c('CLP', ','),
+                       
+                       ## may want to add to verb list -- no ??
+                       PRV = c('SUAPRV', 'PRV'),
+                       PUB = c('SUAPUB', 'PUB'),
+                       SUA = c('SUA', 'SUAPUB', 'SUAPRV')
+                       )
+```
+ 
+ 
+
+Some patterns:
+
+
+```{r}
+zz <- list(f18 = 'BE (ADV)* VBN by',
+           f29 = 'NOUN that (ADV)* VBD', # *
+           f19 = 'BE (DET|POSSPRO|PREP|ADJ)',
+           f22 = 'ADJ that',
+           f30 = 'NOUN that (DET|SUBJPRO|POSSPRO)', # *
+           f33 = 'PREP WHP',
+           f62 = 'to (ADV)+ VB',
+           f61 = 'PREP CL-P',
+           cc = 'MODAL V') # *
+```
+

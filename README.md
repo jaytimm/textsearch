@@ -1,10 +1,10 @@
-# linguistic features
+## linguistic features
 
 ``` r
 library(tidyverse)
 ```
 
-### Build a corpus from current news
+## Build a corpus from current news
 
 ``` r
 rss1 <- lapply(c('economy', 
@@ -27,7 +27,7 @@ news <- quicknews::qnews_extract_article(url = meta$link[1:100],
   mutate(doc_id = row_number() )
 ```
 
-### Annotate corpus
+## Annotate corpus
 
 ``` r
 setwd(locald)
@@ -66,18 +66,27 @@ generic_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
 ## f18 = 'BE (ADV)* VBN by'
 search <- lxfeatures::translate_query(x = 'VBG the ADJ N', mapping = generic_mapping)
 
-search %>% head() %>% knitr::kable()
+search
 ```
 
-| x                                                                            |
-|:-----------------------------------------------------------------------------|
-| VBG\~+ +\~the (JJ\~+ \|JJR\~+ \|JJS\~+ )(NN\~+ \|NNP\~+ \|NNPS\~+ \|NNS\~+ ) |
+    ## [1] "VBG~\\S+ \\S+~the (JJ~\\S+ |JJR~\\S+ |JJS~\\S+ )(NN~\\S+ |NNP~\\S+ |NNPS~\\S+ |NNS~\\S+ )"
 
 ### Identify - extract grammatical constructions –
 
 ``` r
 found <- lxfeatures::find_gramx(tif = inline_tif, query = search)
+
+found %>% head() %>% knitr::kable()
 ```
+
+| doc_id | construction                                      | start |   end |
+|:-------|:--------------------------------------------------|------:|------:|
+| 5      | VBG\~suppressing DT\~the JJ\~initial NN\~wave     |  6673 |  6714 |
+| 11     | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | 13108 | 13153 |
+| 19     | VBG\~plaguing DT\~the JJ\~entire NN\~world        |   112 |   150 |
+| 22     | VBG\~posting DT\~the JJS\~best NNS\~returns       |  4893 |  4932 |
+| 36     | VBG\~inspiring DT\~the JJ\~next NN\~generation    |  1220 |  1262 |
+| 43     | VBG\~ending DT\~the JJ\~abusive NN\~practice      | 10640 | 10680 |
 
 ### Add sentential context to a `gramx` object –
 
@@ -86,25 +95,23 @@ f_sentence <- lxfeatures::add_context(gramx = found,
                           df = anno,
                           form = 'token', 
                           tag = 'xpos',
-                          highlight = '|')
+                          highlight = '`')
 
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                                      | text                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|:-------|------------:|:--------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 11     |          77 | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | That changed abruptly in 2021 , for reasons \|involving the economic dynamics\| discussed above .                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| 36     |           4 | VBG\~inspiring DT\~the JJ\~next NN\~generation    | They include strengthening the global financial safety net , promoting good quality jobs in the face of the “ Great Resignation , ” assessing the future of multilateralism and global governance , reversing COVID-19 ’ s impact on extreme poverty , \|inspiring the next generation\| of women leaders , addressing America’s crisis of despair , transforming and improving education systems , harnessing technology for inclusive growth , developing climate policy for sustainable development , and more . |
-| 89     |          22 | VBG\~becoming DT\~the JJ\~next NN\~front          | Capital markets are \|becoming the next front\| in the geopolitical competition between democracies and autocracies .                                                                                                                                                                                                                                                                                                                                                                                               |
-| 62     |          20 | VBG\~coming DT\~the JJ\~major NNS\~ports          | Now and in the \|coming the major ports\| of Los Angeles and Long Beach , which account for 40 percent of containerized shipping , along with firms such as Walmart , FedEx and UPS will be operating 24 / 7 .                                                                                                                                                                                                                                                                                                      |
-| 19     |           2 | VBG\~plaguing DT\~the JJ\~entire NN\~world        | The uncertainties \|plaguing the entire world\| are enormous .                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| doc_id | sentence_id | construction                                      | text                                                                                                                                                                                                                           |
+|:-------|------------:|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 67     |          74 | VBG\~impoverishing DT\~the JJ\~middle NN\~class   | In Turkey , skyrocketing prices are causing misery among the poor and <span style="background-color:`">impoverishing the middle class</span> .                                                                                 |
+| 89     |          22 | VBG\~becoming DT\~the JJ\~next NN\~front          | Capital markets are <span style="background-color:`">becoming the next front</span> in the geopolitical competition between democracies and autocracies .                                                                      |
+| 11     |          77 | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | That changed abruptly in 2021 , for reasons <span style="background-color:`">involving the economic dynamics</span> discussed above .                                                                                          |
+| 89     |         107 | VBG\~exceeding DT\~the JJ\~total NN\~amount       | This is the amount of money US companies paid in ransom in the first half of 2021 , <span style="background-color:`">exceeding the total amount</span> paid in 2020 by 42 percent .                                            |
+| 67     |          59 | VBG\~impoverishing DT\~the JJ\~middle NN\~class   | In Turkey , the inflation rate has surged past 20 percent amid Mr. Erdogan’s policies , and skyrocketing prices are causing misery among the poor and <span style="background-color:`">impoverishing the middle class</span> . |
 
 ### Recode constructions – per annotated DF –
 
 ``` r
 simple_np <- '(DT)?(ADJ|N)+(N)+'
-
-# noun_phrases <- '(M|A|N)+N(P+D*(M|A|N)*N)*'
 
 search_np <- lxfeatures::translate_query(x = simple_np, mapping = generic_mapping)
 ```
@@ -163,6 +170,8 @@ biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
                        SUA = c('SUA', 'SUAPUB', 'SUAPRV')
                        )
 ```
+
+Some patterns:
 
 ``` r
 zz <- list(f18 = 'BE (ADV)* VBN by',
