@@ -100,13 +100,13 @@ f_sentence <- lxfeatures::add_context(gramx = found,
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                                      | text                                                                                                                                                                                                                                                                            |
-|:-------|------------:|:--------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 11     |          77 | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | That changed abruptly in 2021 , for reasons `involving the economic dynamics` discussed above .                                                                                                                                                                                 |
-| 43     |          43 | VBG\~ending DT\~the JJ\~abusive NN\~practice      | Arguably , the regulator that gig companies most fear is the Labor Department , which has said it’s “ committed to `ending the abusive practice` of misclassifying employees as independent contractors , which deprives these workers of critical protections and benefits . ” |
-| 19     |           2 | VBG\~plaguing DT\~the JJ\~entire NN\~world        | The uncertainties `plaguing the entire world` are enormous .                                                                                                                                                                                                                    |
-| 75     |          41 | VBG\~delivering DT\~the JJ\~full NNS\~gains       | They see the economy showing signs of what liberal economists have long said is the recipe for `delivering the full gains` of economic growth to low-paid and middle-class workers , even after factoring in rising prices .                                                    |
-| 22     |          21 | VBG\~posting DT\~the JJS\~best NNS\~returns       | All 11 sectors finished 2021 higher , with energy and real estate `posting the best returns` .                                                                                                                                                                                  |
+| doc_id | sentence_id | construction                                    | text                                                                                                                                                                                                                                                                                                                                                      |
+|:-------|------------:|:------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 5      |          30 | VBG\~suppressing DT\~the JJ\~initial NN\~wave   | Even if the U.S. economy does get through the Omicron wave relatively unscathed , with few or no lockdowns , the new variant could affect production in the Chinese economy , which supplies many components and finished goods to the U.S. China just recorded the largest number of weekly cases since `suppressing the initial wave` of the pandemic . |
+| 62     |          20 | VBG\~coming DT\~the JJ\~major NNS\~ports        | Now and in the `coming the major ports` of Los Angeles and Long Beach , which account for 40 percent of containerized shipping , along with firms such as Walmart , FedEx and UPS will be operating 24 / 7 .                                                                                                                                              |
+| 89     |         107 | VBG\~exceeding DT\~the JJ\~total NN\~amount     | This is the amount of money US companies paid in ransom in the first half of 2021 , `exceeding the total amount` paid in 2020 by 42 percent .                                                                                                                                                                                                             |
+| 67     |          74 | VBG\~impoverishing DT\~the JJ\~middle NN\~class | In Turkey , skyrocketing prices are causing misery among the poor and `impoverishing the middle class` .                                                                                                                                                                                                                                                  |
+| 75     |          41 | VBG\~delivering DT\~the JJ\~full NNS\~gains     | They see the economy showing signs of what liberal economists have long said is the recipe for `delivering the full gains` of economic growth to low-paid and middle-class workers , even after factoring in rising prices .                                                                                                                              |
 
 ### Recode constructions – per annotated DF –
 
@@ -117,7 +117,8 @@ search_np <- lxfeatures::translate_query(x = simple_np, mapping = generic_mappin
 ```
 
 ``` r
-found0 <- lxfeatures::find_gramx(tif = inline_tif, query = search_np)
+found0 <- lxfeatures::find_gramx(tif = inline_tif, 
+                                 query = search_np)
 
 new_anno <- lxfeatures::recode_gramx(df = anno,
                          gramx = found0,
@@ -127,7 +128,26 @@ new_anno <- lxfeatures::recode_gramx(df = anno,
                          new_cat = 'NPhrase',
                          renumber = T
                          )
+
+new_anno %>% 
+  select(doc_id, sentence_id, 
+         term_id, token, xpos) %>%
+  slice(1:10) %>%
+  knitr::kable()
 ```
+
+| doc_id | sentence_id | term_id | token                    | xpos    |
+|:-------|------------:|--------:|:-------------------------|:--------|
+| 1      |           1 |       1 | The_economic_numbers     | NPhrase |
+| 1      |           1 |       2 | that                     | IN      |
+| 1      |           1 |       3 | government_statisticians | NPhrase |
+| 1      |           1 |       4 | routinely                | RB      |
+| 1      |           1 |       5 | produce                  | VB      |
+| 1      |           1 |       6 | matter                   | NN      |
+| 1      |           1 |       7 | .                        | .       |
+| 1      |           2 |       8 | Statistics               | NNS     |
+| 1      |           2 |       9 | are                      | VBP     |
+| 1      |           2 |      10 | fundamental              | JJ      |
 
 ## Some Biber (1988) odds/ends –
 

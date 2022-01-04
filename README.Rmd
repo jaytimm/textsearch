@@ -167,7 +167,8 @@ search_np <- lxfeatures::translate_query(x = simple_np, mapping = generic_mappin
 
 
 ```{r}
-found0 <- lxfeatures::find_gramx(tif = inline_tif, query = search_np)
+found0 <- lxfeatures::find_gramx(tif = inline_tif, 
+                                 query = search_np)
 
 new_anno <- lxfeatures::recode_gramx(df = anno,
                          gramx = found0,
@@ -177,6 +178,12 @@ new_anno <- lxfeatures::recode_gramx(df = anno,
                          new_cat = 'NPhrase',
                          renumber = T
                          )
+
+new_anno %>% 
+  select(doc_id, sentence_id, 
+         term_id, token, xpos) %>%
+  slice(1:10) %>%
+  knitr::kable()
 ```
 
 
