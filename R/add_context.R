@@ -44,7 +44,7 @@ add_context <- function(gramx,
   ### highlight piece --
   if(!is.null(highlight)) {
 
-    if(highlight == '|'){p1 <- '|'; p2 <- '|'} else{
+    if(nchar(highlight) < 3){p1 <- highlight; p2 <- highlight} else{
 
       p1 <- paste0('<span style="background-color:', highlight, '">')
       p2 <- '</span> '}

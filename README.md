@@ -100,13 +100,13 @@ f_sentence <- lxfeatures::add_context(gramx = found,
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                                      | text                                                                                                                                                                                                                           |
-|:-------|------------:|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 67     |          74 | VBG\~impoverishing DT\~the JJ\~middle NN\~class   | In Turkey , skyrocketing prices are causing misery among the poor and <span style="background-color:`">impoverishing the middle class</span> .                                                                                 |
-| 89     |          22 | VBG\~becoming DT\~the JJ\~next NN\~front          | Capital markets are <span style="background-color:`">becoming the next front</span> in the geopolitical competition between democracies and autocracies .                                                                      |
-| 11     |          77 | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | That changed abruptly in 2021 , for reasons <span style="background-color:`">involving the economic dynamics</span> discussed above .                                                                                          |
-| 89     |         107 | VBG\~exceeding DT\~the JJ\~total NN\~amount       | This is the amount of money US companies paid in ransom in the first half of 2021 , <span style="background-color:`">exceeding the total amount</span> paid in 2020 by 42 percent .                                            |
-| 67     |          59 | VBG\~impoverishing DT\~the JJ\~middle NN\~class   | In Turkey , the inflation rate has surged past 20 percent amid Mr. Erdogan’s policies , and skyrocketing prices are causing misery among the poor and <span style="background-color:`">impoverishing the middle class</span> . |
+| doc_id | sentence_id | construction                                      | text                                                                                                                                                                                                                                                                            |
+|:-------|------------:|:--------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 11     |          77 | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | That changed abruptly in 2021 , for reasons `involving the economic dynamics` discussed above .                                                                                                                                                                                 |
+| 43     |          43 | VBG\~ending DT\~the JJ\~abusive NN\~practice      | Arguably , the regulator that gig companies most fear is the Labor Department , which has said it’s “ committed to `ending the abusive practice` of misclassifying employees as independent contractors , which deprives these workers of critical protections and benefits . ” |
+| 19     |           2 | VBG\~plaguing DT\~the JJ\~entire NN\~world        | The uncertainties `plaguing the entire world` are enormous .                                                                                                                                                                                                                    |
+| 75     |          41 | VBG\~delivering DT\~the JJ\~full NNS\~gains       | They see the economy showing signs of what liberal economists have long said is the recipe for `delivering the full gains` of economic growth to low-paid and middle-class workers , even after factoring in rising prices .                                                    |
+| 22     |          21 | VBG\~posting DT\~the JJS\~best NNS\~returns       | All 11 sectors finished 2021 higher , with energy and real estate `posting the best returns` .                                                                                                                                                                                  |
 
 ### Recode constructions – per annotated DF –
 
@@ -139,16 +139,6 @@ University Press.
 ``` r
 anno[, biber := lxfeatures::biber_tags(token = anno$token, tag = anno$xpos)]
 ```
-
-    ## Warning in `[.data.table`(anno, , `:=`(biber, lxfeatures::biber_tags(token =
-    ## anno$token, : Invalid .internal.selfref detected and fixed by taking a (shallow)
-    ## copy of the data.table so that := can add this new column by reference. At an
-    ## earlier point, this data.table has been copied by R (or was created manually
-    ## using structure() or similar). Avoid names<- and attr<- which in R currently
-    ## (and oddly) may copy the whole data.table. Use set* syntax instead to avoid
-    ## copying: ?set, ?setnames and ?setattr. If this message doesn't help, please
-    ## report your use case to the data.table issue tracker so the root cause can be
-    ## fixed or this message improved.
 
 ### Lexico-grammatical features
 

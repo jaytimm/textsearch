@@ -187,7 +187,7 @@ From: Biber, D. (1988). *Variation across speech and writing*. Cambridge Univers
 
 ### Lexical features
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 anno[, biber := lxfeatures::biber_tags(token = anno$token, tag = anno$xpos)]
 ```
 
