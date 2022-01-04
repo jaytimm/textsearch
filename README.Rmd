@@ -103,6 +103,8 @@ tif <- readRDS('tif.rds')
 inline_tif <- lxfeatures::build_inline(df = anno, 
                            form = 'token', 
                            tag = 'xpos')
+
+strwrap(inline_tif$text[1], width = 60)[1:5]
 ```
 
 
@@ -123,7 +125,8 @@ generic_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
 
 ```{r}
 ## f18 = 'BE (ADV)* VBN by'
-search <- lxfeatures::translate_query(x = 'VBG the ADJ N', mapping = generic_mapping)
+search <- lxfeatures::translate_query(x = 'VBG the ADJ N',
+                                      mapping = generic_mapping)
 
 search
 ```
@@ -161,7 +164,8 @@ f_sentence %>% sample_n(5) %>% knitr::kable()
 ```{r}
 simple_np <- '(DT)?(ADJ|N)+(N)+'
 
-search_np <- lxfeatures::translate_query(x = simple_np, mapping = generic_mapping)
+search_np <- lxfeatures::translate_query(x = simple_np,
+                                         mapping = generic_mapping)
 ```
 
 
@@ -180,7 +184,7 @@ new_anno <- lxfeatures::recode_gramx(df = anno,
                          )
 
 new_anno %>% 
-  select(doc_id, sentence_id, 
+  select(doc_id, sentence_id, token_id,
          term_id, token, xpos) %>%
   slice(1:10) %>%
   knitr::kable()
