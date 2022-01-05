@@ -25,12 +25,8 @@ https://aclanthology.org/W17-3001.pdf
 
 ```
 
-```{r message=FALSE, warning=FALSE}
-library(tidyverse)
-```
 
-
-## Installation ::
+## Installation
 
 You can download the development version from GitHub with:
 
@@ -40,10 +36,16 @@ remotes::install_github("jaytimm/textsearch")
 
 
 
-## Usage ::
+## Usage
 
 
 ## Build a corpus
+
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE}
 rss1 <- lapply(c('economy', 
@@ -187,6 +189,7 @@ Concatenate and re-code `find_gramx()` results in annotated data frame:
 found0 <- lxfeatures::find_gramx(tif = inline_tif, 
                                  query = search_np)
 
+# this needs a sep parameter -- 
 new_anno <- lxfeatures::recode_gramx(df = anno,
                                      gramx = found0,
                                      form = 'token', 
@@ -212,7 +215,7 @@ new_anno %>%
 
 From: Biber, D. (1988). *Variation across speech and writing*. Cambridge University Press.
 
-### Lexical features
+### Biber tags
 
 ```{r message=FALSE, warning=FALSE}
 anno[, biber := lxfeatures::biber_tags(token = anno$token, 
@@ -232,9 +235,7 @@ anno %>%
 
 
 
-### Lexico-grammatical features
-
-Mappings per Biber (1988):
+### Biber mappings
 
 ```{r}
 biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
@@ -257,8 +258,7 @@ biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
  
  
 
-Some constructions:
-
+### Some features
 
 ```{r}
 zz <- list(f18 = 'BE (ADV)* VBN by',
