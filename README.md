@@ -186,7 +186,7 @@ new_anno %>%
 From: Biber, D. (1988). *Variation across speech and writing*. Cambridge
 University Press.
 
-### Biber tags
+### Tags
 
 ``` r
 anno[, biber := lxfeatures::biber_tags(token = anno$token, 
@@ -216,7 +216,7 @@ anno %>%
 | 1      |           1 | matter        | NN   | NN    |
 | 1      |           1 | .             | .    | CLP   |
 
-### Biber mappings
+### Mappings
 
 ``` r
 biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
