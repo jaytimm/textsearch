@@ -1,10 +1,23 @@
-## textsearch
+# textsearch
+
+A simple framework for searching annotated corpora for grammatical
+constructions in context.
 
 ``` r
 library(tidyverse)
 ```
 
-## Build a corpus from current news
+## Installation
+
+You can download the development version from GitHub with:
+
+``` r
+remotes::install_github("jaytimm/quicknews")
+```
+
+## ## Usage
+
+## Build a corpus
 
 ``` r
 rss1 <- lapply(c('economy', 
@@ -37,14 +50,14 @@ anno <- news %>%
   text2df::token2annotation(model = udmodel)
 ```
 
-## Search process –
+## Search process
 
 ### Build inline TIF
 
 ``` r
 inline_tif <- lxfeatures::build_inline(df = anno, 
-                           form = 'token', 
-                           tag = 'xpos')
+                                       form = 'token', 
+                                       tag = 'xpos')
 
 strwrap(inline_tif$text[1], width = 60)[1:5]
 ```
@@ -68,53 +81,58 @@ generic_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
 ### Build inline query
 
 ``` r
-## f18 = 'BE (ADV)* VBN by'
-search <- lxfeatures::translate_query(x = 'VBG the ADJ N',
+f18 <- '(is|was) (ADV)* VBN by'
+search <- lxfeatures::translate_query(x = f18,
                                       mapping = generic_mapping)
 
 search
 ```
 
-    ## [1] "VBG~\\S+ \\S+~the (JJ~\\S+ |JJR~\\S+ |JJS~\\S+ )(NN~\\S+ |NNP~\\S+ |NNPS~\\S+ |NNS~\\S+ )"
+    ## [1] "\\S+~(is|was) (RB~\\S+ |RBR~\\S+ |RBS~\\S+ )*VBN~\\S+ \\S+~by "
 
 ### Identify - extract grammatical constructions –
 
 ``` r
 found <- lxfeatures::find_gramx(tif = inline_tif, query = search)
 
-found %>% head() %>% knitr::kable()
+found %>% slice(3:9) %>% knitr::kable()
 ```
 
-| doc_id | construction                                      | start |   end |
-|:-------|:--------------------------------------------------|------:|------:|
-| 5      | VBG\~suppressing DT\~the JJ\~initial NN\~wave     |  6673 |  6714 |
-| 11     | VBG\~involving DT\~the JJ\~economic NNS\~dynamics | 13108 | 13153 |
-| 19     | VBG\~plaguing DT\~the JJ\~entire NN\~world        |   112 |   150 |
-| 22     | VBG\~posting DT\~the JJS\~best NNS\~returns       |  4893 |  4932 |
-| 36     | VBG\~inspiring DT\~the JJ\~next NN\~generation    |  1220 |  1262 |
-| 43     | VBG\~ending DT\~the JJ\~abusive NN\~practice      | 10640 | 10680 |
+| doc_id | construction                           | start |   end |
+|:-------|:---------------------------------------|------:|------:|
+| 15     | VBD\~was VBN\~beaten IN\~by            | 14082 | 14106 |
+| 24     | VBD\~was VBN\~cut IN\~by               |  1499 |  1520 |
+| 27     | VBZ\~is VBN\~established IN\~by        |  9483 |  9511 |
+| 30     | VBD\~was VBN\~fueled IN\~by            |   737 |   761 |
+| 35     | VBZ\~is RB\~not VBN\~authorized IN\~by |    26 |    60 |
+| 35     | VBZ\~is RB\~not VBN\~authorized IN\~by |  4777 |  4811 |
+| 39     | VBZ\~is RB\~primarily VBN\~held IN\~by |  2123 |  2157 |
 
-### Add sentential context to a `gramx` object –
+### Add sentential context to a `gramx` object
 
 ``` r
 f_sentence <- lxfeatures::add_context(gramx = found,
-                          df = anno,
-                          form = 'token', 
-                          tag = 'xpos',
-                          highlight = '`')
+                                      df = anno,
+                                      form = 'token', 
+                                      tag = 'xpos',
+                                      highlight = '`')
 
-f_sentence %>% sample_n(5) %>% knitr::kable()
+f_sentence %>% slice(3:9) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                                   | text                                                                                                                                                                                                                                                                                                       |
-|:-------|------------:|:-----------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 43     |          43 | VBG\~ending DT\~the JJ\~abusive NN\~practice   | Arguably , the regulator that gig companies most fear is the Labor Department , which has said it’s “ committed to `ending the abusive practice` of misclassifying employees as independent contractors , which deprives these workers of critical protections and benefits . ”                            |
-| 80     |          14 | VBG\~raising DT\~the JJ\~median NN\~salary     | McKinney said the main focus for the NEDC is `raising the median salary` , subsequently creating a ripple effect through the local economy .                                                                                                                                                               |
-| 80     |          64 | VBG\~prohibiting DT\~the JJ\~free NN\~exercise | First Amendment : Congress shall make no law respecting an establishment of religion , or `prohibiting the free exercise` thereof ; or abridging the freedom of speech , or of the press ; or the right of the people peaceably to assemble , and to petition the Government for a redress of grievances . |
-| 89     |         107 | VBG\~exceeding DT\~the JJ\~total NN\~amount    | This is the amount of money US companies paid in ransom in the first half of 2021 , `exceeding the total amount` paid in 2020 by 42 percent .                                                                                                                                                              |
-| 75     |          41 | VBG\~delivering DT\~the JJ\~full NNS\~gains    | They see the economy showing signs of what liberal economists have long said is the recipe for `delivering the full gains` of economic growth to low-paid and middle-class workers , even after factoring in rising prices .                                                                               |
+| doc_id | sentence_id | construction                           | text                                                                                                                                              |
+|:-------|------------:|:---------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| 15     |          62 | VBD\~was VBN\~beaten IN\~by            | A gay rights activist `was beaten by` the police in October , showing what activists said was increased targeting by the police since July 25 .   |
+| 24     |           5 | VBD\~was VBN\~cut IN\~by               | Similarly , the 2021 forecast for global growth `was cut by` 0.1 percentage points to 5.1 % .                                                     |
+| 27     |          43 | VBZ\~is VBN\~established IN\~by        | ” We acknowledge the value of the SME100 Award , which `is established by` a globally-reputed organization .                                      |
+| 30     |           4 | VBD\~was VBN\~fueled IN\~by            | Fashion saw a big boost last year with consumer spending that `was fueled by` government stimulus , pent-up demand and a stay-at-home mentality . |
+| 35     |           1 | VBZ\~is RB\~not VBN\~authorized IN\~by | This communication `is not authorized by` any candidate or candidate’s committee .                                                                |
+| 35     |          20 | VBZ\~is RB\~not VBN\~authorized IN\~by | This communication `is not authorized by` any candidate or candidate’s committee .                                                                |
+| 39     |           8 | VBZ\~is RB\~primarily VBN\~held IN\~by | Student loan debt `is primarily held by` borrowers who were raised in higher-income households and now live in higher-income households .         |
 
-### Recode constructions – per annotated DF –
+### Recode constructions
+
+A simple noun phrase search:
 
 ``` r
 simple_np <- '(DT)?(ADJ|N)+(N)+'
@@ -123,19 +141,24 @@ search_np <- lxfeatures::translate_query(x = simple_np,
                                          mapping = generic_mapping)
 ```
 
+Concatenate and re-code attested `gramx` results in annotated data
+frame:
+
 ``` r
 found0 <- lxfeatures::find_gramx(tif = inline_tif, 
                                  query = search_np)
 
 new_anno <- lxfeatures::recode_gramx(df = anno,
-                         gramx = found0,
-                         form = 'token', 
-                         tag = 'xpos',
-                         col = 'xpos',
-                         new_cat = 'NPhrase',
-                         renumber = T
-                         )
+                                     gramx = found0,
+                                     form = 'token', 
+                                     tag = 'xpos',
+                                     
+                                     col = 'xpos',
+                                     new_cat = 'NPhrase',
+                                     renumber = T)
+```
 
+``` r
 new_anno %>% 
   select(doc_id, sentence_id, token_id,
          term_id, token, xpos) %>%
@@ -156,7 +179,7 @@ new_anno %>%
 | 1      |           2 | 2        |       9 | are                      | VBP     |
 | 1      |           2 | 3        |      10 | fundamental              | JJ      |
 
-## Some Biber (1988) odds/ends –
+## Some Biber (1988) odds/ends
 
 From: Biber, D. (1988). *Variation across speech and writing*. Cambridge
 University Press.
@@ -164,8 +187,8 @@ University Press.
 ### Lexical features
 
 ``` r
-# data.table::setDT(anno)
-anno[, biber := lxfeatures::biber_tags(token = anno$token, tag = anno$xpos)]
+anno[, biber := lxfeatures::biber_tags(token = anno$token, 
+                                       tag = anno$xpos)]
 ```
 
 Eg:
@@ -212,7 +235,7 @@ biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
                        )
 ```
 
-Some patterns:
+Some constructions:
 
 ``` r
 zz <- list(f18 = 'BE (ADV)* VBN by',
@@ -222,6 +245,5 @@ zz <- list(f18 = 'BE (ADV)* VBN by',
            f30 = 'NOUN that (DET|SUBJPRO|POSSPRO)', # *
            f33 = 'PREP WHP',
            f62 = 'to (ADV)+ VB',
-           f61 = 'PREP CL-P',
-           cc = 'MODAL V') # *
+           f61 = 'PREP CL-P') # *
 ```
