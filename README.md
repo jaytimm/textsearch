@@ -1,7 +1,9 @@
 # textsearch
 
 A simple framework for searching annotated corpora for grammatical
-constructions in context.
+constructions in context. With some add-on functionality for featurizing
+texts per [Biber
+(1988)](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=mdWIU4MAAAAJ&alert_preview_top_rm=2&citation_for_view=mdWIU4MAAAAJ:u-x6o8ySG0sC).
 
 ``` r
 library(tidyverse)
@@ -12,10 +14,10 @@ library(tidyverse)
 You can download the development version from GitHub with:
 
 ``` r
-remotes::install_github("jaytimm/quicknews")
+remotes::install_github("jaytimm/textsearch")
 ```
 
-## ## Usage
+## Usage
 
 ## Build a corpus
 
@@ -90,7 +92,7 @@ search
 
     ## [1] "\\S+~(is|was) (RB~\\S+ |RBR~\\S+ |RBS~\\S+ )*VBN~\\S+ \\S+~by "
 
-### Identify - extract grammatical constructions –
+### Identify - extract grammatical constructions
 
 ``` r
 found <- lxfeatures::find_gramx(tif = inline_tif, query = search)
