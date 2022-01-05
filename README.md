@@ -9,7 +9,7 @@ texts per [Biber
 library(tidyverse)
 ```
 
-## Installation
+## Installation ::
 
 You can download the development version from GitHub with:
 
@@ -17,7 +17,7 @@ You can download the development version from GitHub with:
 remotes::install_github("jaytimm/textsearch")
 ```
 
-## Usage
+## Usage ::
 
 ## Build a corpus
 
@@ -143,8 +143,7 @@ search_np <- lxfeatures::translate_query(x = simple_np,
                                          mapping = generic_mapping)
 ```
 
-Concatenate and re-code attested `gramx` results in annotated data
-frame:
+Concatenate and re-code `find_gramx()` results in annotated data frame:
 
 ``` r
 found0 <- lxfeatures::find_gramx(tif = inline_tif, 
@@ -217,6 +216,8 @@ anno %>%
 | 1      |           1 | .             | .    | CLP   |
 
 ### Lexico-grammatical features
+
+Mappings per Biber (1988):
 
 ``` r
 biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
