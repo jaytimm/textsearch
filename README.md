@@ -57,7 +57,7 @@ anno <- news %>%
 ### Build inline TIF
 
 ``` r
-inline_tif <- lxfeatures::build_inline(df = anno, 
+inline_tif <- textsearch::build_inline(df = anno, 
                                        form = 'token', 
                                        tag = 'xpos')
 
@@ -73,19 +73,27 @@ strwrap(inline_tif$text[1], width = 60)[1:5]
 ### Optionally set tag mappings
 
 ``` r
-generic_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
-                         N = c('NN', 'NNP', 'NNPS', 'NNS'),
-                         ADJ = c('JJ', 'JJR', 'JJS'),
-                         ADV = c('RB', 'RBR', 'RBS')
-                         )
+textsearch::mapping_generic
 ```
+
+    ## $V
+    ## [1] "VB"  "VBD" "VBG" "VBN" "VBP" "VBZ"
+    ## 
+    ## $N
+    ## [1] "NN"   "NNP"  "NNPS" "NNS" 
+    ## 
+    ## $ADJ
+    ## [1] "JJ"  "JJR" "JJS"
+    ## 
+    ## $ADV
+    ## [1] "RB"  "RBR" "RBS"
 
 ### Build inline query
 
 ``` r
 f18 <- '(is|was) (ADV)* VBN by'
-search <- lxfeatures::translate_query(x = f18,
-                                      mapping = generic_mapping)
+search <- textsearch::translate_query(x = f18,
+                                      mapping = textsearch::mapping_generic)
 
 search
 ```
@@ -95,7 +103,7 @@ search
 ### Identify - extract grammatical constructions
 
 ``` r
-found <- lxfeatures::find_gramx(tif = inline_tif, query = search)
+found <- textsearch::find_gramx(tif = inline_tif, query = search)
 
 found %>% slice(3:9) %>% knitr::kable()
 ```
@@ -110,10 +118,10 @@ found %>% slice(3:9) %>% knitr::kable()
 | 35     | VBZ\~is RB\~not VBN\~authorized IN\~by |  4777 |  4811 |
 | 39     | VBZ\~is RB\~primarily VBN\~held IN\~by |  2123 |  2157 |
 
-### Add sentential context to a `gramx` object
+### Add sentential context
 
 ``` r
-f_sentence <- lxfeatures::add_context(gramx = found,
+f_sentence <- textsearch::add_context(gramx = found,
                                       df = anno,
                                       form = 'token', 
                                       tag = 'xpos',
@@ -139,18 +147,18 @@ A simple noun phrase search:
 ``` r
 simple_np <- '(DT)?(ADJ|N)+(N)+'
 
-search_np <- lxfeatures::translate_query(x = simple_np,
-                                         mapping = generic_mapping)
+search_np <- textsearch::translate_query(x = simple_np,
+                                         mapping = textsearch::mapping_generic)
 ```
 
 Concatenate and re-code `find_gramx()` results in annotated data frame:
 
 ``` r
-found0 <- lxfeatures::find_gramx(tif = inline_tif, 
+found0 <- textsearch::find_gramx(tif = inline_tif, 
                                  query = search_np)
 
 # this needs a sep parameter -- 
-new_anno <- lxfeatures::recode_gramx(df = anno,
+new_anno <- textsearch::recode_gramx(df = anno,
                                      gramx = found0,
                                      form = 'token', 
                                      tag = 'xpos',
@@ -189,7 +197,7 @@ University Press.
 ### Tags
 
 ``` r
-anno[, biber := lxfeatures::biber_tags(token = anno$token, 
+anno[, biber := textsearch::biber_tags(token = anno$token, 
                                        tag = anno$xpos)]
 ```
 
@@ -219,23 +227,42 @@ anno %>%
 ### Mappings
 
 ``` r
-biber_mapping  <- list(V = c('VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ'),
-                       N = c('NN', 'NNP', 'NNPS', 'NNS'),
-                       ADJ = c('JJ', 'JJR', 'JJS'),
-                       ADV = c('RB', 'RBR', 'RBS'),
-                       AUX = c('MODAL', 'HAVE', 'BE', 'DO', 'S'),
-                       PRO = c('SUBJPRO', 'OBJPRO', 
-                               'POSSPRO', 'REFLEXPRO', 
-                               'YOU', 'HER', 'IT'),
-                       DET = c('ART', 'DEM', 'QUAN', 'NUM'),
-                       ALLP = c('CLP', ','),
-                       
-                       ## may want to add to verb list -- no ??
-                       PRV = c('SUAPRV', 'PRV'),
-                       PUB = c('SUAPUB', 'PUB'),
-                       SUA = c('SUA', 'SUAPUB', 'SUAPRV')
-                       )
+textsearch::mapping_biber
 ```
+
+    ## $V
+    ## [1] "VB"  "VBD" "VBG" "VBN" "VBP" "VBZ"
+    ## 
+    ## $N
+    ## [1] "NN"   "NNP"  "NNPS" "NNS" 
+    ## 
+    ## $ADJ
+    ## [1] "JJ"  "JJR" "JJS"
+    ## 
+    ## $ADV
+    ## [1] "RB"  "RBR" "RBS"
+    ## 
+    ## $AUX
+    ## [1] "MODAL" "HAVE"  "BE"    "DO"    "S"    
+    ## 
+    ## $PRO
+    ## [1] "SUBJPRO"   "OBJPRO"    "POSSPRO"   "REFLEXPRO" "YOU"       "HER"      
+    ## [7] "IT"       
+    ## 
+    ## $DET
+    ## [1] "ART"  "DEM"  "QUAN" "NUM" 
+    ## 
+    ## $ALLP
+    ## [1] "CLP" ","  
+    ## 
+    ## $PRV
+    ## [1] "SUAPRV" "PRV"   
+    ## 
+    ## $PUB
+    ## [1] "SUAPUB" "PUB"   
+    ## 
+    ## $SUA
+    ## [1] "SUA"    "SUAPUB" "SUAPRV"
 
 ### Some features
 
