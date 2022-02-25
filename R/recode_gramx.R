@@ -20,19 +20,18 @@ recode_gramx <- function(gramx,
                          new_cat = 'cx1',
                          renumber = T){
 
-
+  ## build new char onset/offset per inline --
+  ## in order to align with gramx onset/offests --
   data.table::setDT(df)
   df[, inline := paste0(get(tag), '~', get(form), ' ')]
   df[, end := cumsum(nchar(inline)), by = list(doc_id)]
   df[, start := c(1, end[1:(length(end)-1)] + 1),
     by = list(doc_id)]
 
-  ### modify search output --
+  ### modify gramx object -- ready for join to full df --
   f0 <- gramx
-
   f0[, id := seq_len(.N), by = doc_id]
   f0 <- df[, c('doc_id', 'start', 'term_id')][f0, on = c('doc_id', 'start')]
-
   f1 <- f0[, .(token = unlist(data.table::tstrsplit(construction, " "))),
            by = list(doc_id, term_id, id, construction)]
   f1[, term_id2 := term_id]
@@ -44,12 +43,13 @@ recode_gramx <- function(gramx,
   f10[, term_id2 := ifelse(is.na(term_id2), term_id, term_id2)]
   f100 <- f10[f10[, .I[1], list (doc_id, term_id2)]$V1]
 
-  ## LASTLY -- need to re-assign token and lemma columns to construction --
+  ## Re-assign token and lemma columns -
   f100[, (col) := ifelse(!is.na(construction), new_cat, get(col))]
 
-  ## IF re-number
+  ## Re-number
   f100[, term_id := seq_len(.N), by = doc_id]
   f100[, token_id := seq_len(.N), by = list(doc_id, sentence_id)]
+
 
   ## Assign value --
   # x3[, pattern := trimws(gsub('[A-Z]+_', '', construction))]
@@ -60,6 +60,18 @@ recode_gramx <- function(gramx,
                          token)]
   f100[, lemma := ifelse(!is.na(construction), token, lemma)]
 
-  ## return -- what -- ??
+
+  ## Re-do start/stop based on new concatenated forms --
+  f100[, end := cumsum(nchar(inline)), by = list(doc_id)]
+  df[, start := c(1, end[1:(length(end)-1)] + 1),
+     by = list(doc_id)]
+
+  ## Remove derived columns --
+
+  # [1] "doc_id"      "sentence_id" "start"       "end"
+  # [5] "term_id"     "token_id"    "token"       "lemma"
+  # [9] "upos"        "xpos"
+
+  ## return
   return(f100)
 }
