@@ -38,9 +38,7 @@ https://aclanthology.org/W17-3001.pdf
 
 
 
-## Installation
-
----
+## Installation:
 
 You can download the development version from GitHub with:
 
@@ -50,9 +48,7 @@ remotes::install_github("jaytimm/textsearch")
 
 
 
-## Usage
-
----
+## Usage:
 
 ## TIF search
 
@@ -158,7 +154,7 @@ search
 
 
 
-### Identify - extract grammatical constructions 
+### Identify/extract grammatical constructions 
 
 ```{r}
 found <- textsearch::find_gramx(tif = inline_tif, query = search)
@@ -219,7 +215,7 @@ see_example <- function(df,
 
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 new_annotation %>%
   group_by(doc_id, sentence_id) %>%
   filter(any(xpos == 'by_passive')) %>%

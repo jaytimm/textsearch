@@ -7,9 +7,7 @@ annotated corpus search.
 
 For dependency-based search, see [this lovely package]().
 
-## Installation
-
-------------------------------------------------------------------------
+## Installation:
 
 You can download the development version from GitHub with:
 
@@ -17,9 +15,7 @@ You can download the development version from GitHub with:
 remotes::install_github("jaytimm/textsearch")
 ```
 
-## Usage
-
-------------------------------------------------------------------------
+## Usage:
 
 ## TIF search
 
@@ -142,7 +138,7 @@ search
 
     ## [1] "\\S+~(is|was) (RB~\\S+ |RBR~\\S+ |RBS~\\S+ )*VBN~\\S+ \\S+~by "
 
-### Identify - extract grammatical constructions
+### Identify/extract grammatical constructions
 
 ``` r
 found <- textsearch::find_gramx(tif = inline_tif, query = search)
@@ -206,9 +202,6 @@ new_annotation %>%
   sample_n(5) %>%
   knitr::kable()
 ```
-
-    ## `summarise()` has grouped output by 'doc_id'. You can override using the
-    ## `.groups` argument.
 
 | doc_id | sentence_id | example                                                                                                                                                                                                                                       |
 |:-------|------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
