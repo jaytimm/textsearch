@@ -90,11 +90,11 @@ textsearch::find_lex(query = parts,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern  | context                                                                                                                                                                                                                  |
-|:-------|----:|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 65     | 432 | part     | time to end the show like we do every week with Can’t Let It Go, the `part` of the show where we talk about things from the week we cannot stop talking about,                                                           |
-| 45     | 289 | partisan | political views to pupils. In some circumstances, it may be appropriate for external agencies to express `partisan` political views to pupils. Pupils must understand that these are contested views and still receive a |
-| 91     | 534 | parts    | growth and increasing prosperity,” and at the same time “a period of shrinking inequality in many `parts` of the world.” What kept inequality in check, the report notes, was policies that ensured minimum              |
+| doc_id |  id | pattern | context                                                                                                                                                                                                                                   |
+|:-------|----:|:--------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 65     | 432 | party   | it’s just sort of the types of people that appeal to the different factions inside the `party` . And that will definitely affect how, you know, well or not Congress can function. MONTANARO:                                             |
+| 46     | 289 | part    | and staff can understand and discuss sensitive topics, including terrorism and the extremist ideas that are `part` of terrorist ideology. Schools can build pupils’ resilience to radicalisation by providing an environment for debating |
+| 88     | 534 | parts   | Toyota had to suspend work or cut back hours at U.S. auto factories, waiting for the `parts` to arrive. The workers’ paycheck shrank. Thanks a bunch, GOPers.                                                                             |
 
 ## Annotated corpus search
 
@@ -129,9 +129,9 @@ strwrap(inline_tif$text[1], width = 60)[1:5]
 ### Build inline query
 
 ``` r
-f18 <- '(is|was) (ADV)* VBN by'
-search <- textsearch::translate_query(x = f18,
-                                      mapping = textsearch::mapping_generic)
+search <- textsearch::translate_query(
+  x = '(is|was) (ADV)* VBN by',
+  mapping = textsearch::mapping_generic)
 
 search
 ```
@@ -146,15 +146,15 @@ found <- textsearch::find_gramx(tif = inline_tif, query = search)
 found %>% slice(3:9) %>% knitr::kable()
 ```
 
-| doc_id | construction                         | start |   end |
-|:-------|:-------------------------------------|------:|------:|
-| 5      | VBD\~was VBN\~murdered IN\~by        | 23938 | 23964 |
-| 10     | VBZ\~is VBN\~guided IN\~by           |  2962 |  2985 |
-| 11     | VBZ\~is VBN\~controlled IN\~by       | 12602 | 12629 |
-| 12     | VBZ\~is VBN\~defined IN\~by          |  4571 |  4595 |
-| 16     | VBD\~was VBN\~impacted IN\~by        |  4415 |  4441 |
-| 16     | VBZ\~is RB\~not VBN\~retained IN\~by |  7808 |  7840 |
-| 20     | VBZ\~is VBN\~espoused IN\~by         | 23339 | 23364 |
+| doc_id | construction                          | start |   end |
+|:-------|:--------------------------------------|------:|------:|
+| 5      | VBD\~was VBN\~murdered IN\~by         | 23938 | 23964 |
+| 7      | VBD\~was VBN\~officiated IN\~by       | 19503 | 19531 |
+| 8      | VBD\~was VBN\~required IN\~by         |  8182 |  8208 |
+| 8      | VBD\~was VBN\~driven IN\~by           | 14181 | 14205 |
+| 8      | VBD\~was RB\~all VBN\~designed IN\~by | 16287 | 16320 |
+| 12     | VBZ\~is VBN\~guided IN\~by            |  2962 |  2985 |
+| 13     | VBZ\~is VBN\~controlled IN\~by        | 12602 | 12629 |
 
 ### Add sentential context
 
@@ -169,13 +169,13 @@ set.seed(99)
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                            | text                                                                                                                                                                                                                                          |
-|:-------|------------:|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 69     |          29 | VBZ\~is VBN\~undercut IN\~by            | The argument , she wrote , “ `is undercut by` an utter dearth of absentee fraud . ”                                                                                                                                                           |
-| 87     |          18 | VBZ\~is VBN\~driven IN\~by              | “ Since Trump wants to run for office again , the timeline of the app `is driven by` political objectives – not by readiness of the platform , ” said Jennifer Grygiel , a professor of communications at Syracuse University .               |
-| 48     |          40 | VBZ\~is VBN\~powered IN\~by             | This clearly shows that CCC `is powered by` foreign powers and they are only puppets waiting for instructions from their masters .                                                                                                            |
-| 69     |          69 | VBD\~was VBN\~defined IN\~by            | In a statement , Andrew Bates , a White House spokesman , defended Judge Childs’s record , noting that when she served on South Carolina’s Workers ’ Compensation Commission , “ her tenure `was defined by` fighting for injured workers . ” |
-| 80     |          32 | VBD\~was RB\~not VBN\~vanquished IN\~by | Fascism , the political ideology that denies all rights to individuals in their relations with the state , `was not vanquished by` World War II , only subdued temporarily .                                                                  |
+| doc_id | sentence_id | construction                            | text                                                                                                                                                                                                                                                                                                                              |
+|:-------|------------:|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 87     |          18 | VBZ\~is VBN\~driven IN\~by              | “ Since Trump wants to run for office again , the timeline of the app `is driven by` political objectives – not by readiness of the platform , ” said Jennifer Grygiel , a professor of communications at Syracuse University .                                                                                                   |
+| 60     |           3 | VBZ\~is RB\~usually VBN\~ignored IN\~by | However , the problematic political ideology that underpins the show `is usually ignored by` viewers and critics alike .                                                                                                                                                                                                          |
+| 78     |          41 | VBD\~was VBN\~authored IN\~by           | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , `was authored by` Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi . |
+| 46     |         154 | VBZ\~is VBN\~hosted IN\~by              | It `is hosted by` an external organisation which does not seem to have an obvious partisan political affiliation .                                                                                                                                                                                                                |
+| 67     |          10 | VBZ\~is VBN\~protected IN\~by           | The material on this site `is protected by` copyright law and may not be reproduced , distributed , transmitted , cached or otherwise used .                                                                                                                                                                                      |
 
 ### Recode construction
 
@@ -205,10 +205,10 @@ new_annotation %>%
 
 | doc_id | sentence_id | example                                                                                                                                                                                                                                       |
 |:-------|------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 8      |          39 | She said she had reviewed the curriculum extensively , and while she understood the district `was_required_by` the state to offer the course , board policy was to have it be vetted by the curriculum committee first .                      |
 | 69     |          69 | In a statement , Andrew Bates , a White House spokesman , defended Judge Childs’s record , noting that when she served on South Carolina’s Workers ’ Compensation Commission , “ her tenure `was_defined_by` fighting for injured workers . ” |
-| 78     |          16 | The researchers developed a measure of anti-establishment orientation that `was_characterized_by` conspiratorial , populist , and Manichean worldviews .                                                                                      |
+| 77     |          18 | System justification `is_characterized_by` defending and justifying the societal status quo .                                                                                                                                                 |
 | 69     |          29 | The argument , she wrote , “ `is_undercut_by` an utter dearth of absentee fraud . ”                                                                                                                                                           |
-| 30     |          39 | As vice president , he became Jackson’s heir apparent , and with Old Hickory’s blessing , he `was_nominated_by` the Democratic Party to be the next president of the United States .                                                          |
-| 48     |          55 | The new party ( the old wine in new bottles ) `was_formed_by` Mr Morgan Tsvangirayi and Mr Gibson Sibanda on the back of the labour movement .                                                                                                |
+| 32     |          39 | As vice president , he became Jackson’s heir apparent , and with Old Hickory’s blessing , he `was_nominated_by` the Democratic Party to be the next president of the United States .                                                          |
 
 ## Summary

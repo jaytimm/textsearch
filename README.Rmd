@@ -144,9 +144,9 @@ strwrap(inline_tif$text[1], width = 60)[1:5]
 ### Build inline query 
 
 ```{r}
-f18 <- '(is|was) (ADV)* VBN by'
-search <- textsearch::translate_query(x = f18,
-                                      mapping = textsearch::mapping_generic)
+search <- textsearch::translate_query(
+  x = '(is|was) (ADV)* VBN by',
+  mapping = textsearch::mapping_generic)
 
 search
 ```
