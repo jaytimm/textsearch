@@ -1,11 +1,15 @@
 # textsearch
 
-A simple framework for searching annotated corpora for grammatical
-constructions in context. With some add-on functionality for featurizing
-texts per [Biber
-(1988)](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=mdWIU4MAAAAJ&alert_preview_top_rm=2&citation_for_view=mdWIU4MAAAAJ:u-x6o8ySG0sC).
+A simple framework for searching corpora for lexical & grammatical
+patterns in context. At present, functions facilitate two types of
+search: (1) TIF search, ie, raw, un-annotated text search, and (2)
+annotated corpus search.
+
+For dependency-based search, see [this lovely package]().
 
 ## Installation
+
+------------------------------------------------------------------------
 
 You can download the development version from GitHub with:
 
@@ -15,78 +19,116 @@ remotes::install_github("jaytimm/textsearch")
 
 ## Usage
 
-## Build a corpus
+------------------------------------------------------------------------
+
+## TIF search
+
+### Build corpus
 
 ``` r
 library(tidyverse)
 ```
 
 ``` r
-rss1 <- lapply(c('economy', 
-                 'biden', 
-                 'jobs'),
-               
-               quicknews::qnews_build_rss)
+rss1 <- quicknews::qnews_build_rss(x = 'political ideology')
+meta <- quicknews::qnews_strip_rss(rss1) 
+news <- quicknews::qnews_extract_article(url = meta$link, cores = 7)
+tif <- merge(news, meta)
+tif$doc_id <- c(1:nrow(tif))
 
-meta <- lapply(unlist(rss1), 
-               quicknews::qnews_strip_rss) %>%
-  bind_rows() %>% 
-  distinct()
-
-news <- quicknews::qnews_extract_article(url = meta$link[1:100], 
-                                         cores = 7) %>% 
-  left_join(meta) %>%
-  mutate(doc_id = row_number() )
+list(Date = tif$date[1],
+     Source = tif$source[1],
+     Title = tif$title[1],
+     Article = strwrap(tif$text[1], 
+                       width = 60)[1:5])
 ```
 
-## Annotate corpus
+    ## $Date
+    ## [1] "2022-02-23"
+    ## 
+    ## $Source
+    ## [1] "Chinadaily USA"
+    ## 
+    ## $Title
+    ## [1] "50 years after Nixon's visit, time for kung fu diplomacy"
+    ## 
+    ## $Article
+    ## [1] "Fifty years ago on February 21, 1972, then-US president"  
+    ## [2] "Richard Nixon arrived in Beijing, breaking the ice of the"
+    ## [3] "Cold War. By 1979 formal relations were established. A"   
+    ## [4] "honeymoon era of China-US relations began paralleling"    
+    ## [5] "China's policies of opening its economy and encouraging"
+
+### Queries
+
+``` r
+parts <- '\\bpart[a-z]*\\b'
+pols <- 'political \\w+'
+terms <- c('populism', 'political ideology')
+```
+
+``` r
+textsearch::find_lex(query = pols,
+                     text = tif$text,
+                     doc_id = tif$doc_id,
+                     window = 15,
+                     highlight = c('`', '`')) %>%
+  slice(1:3) %>%
+  knitr::kable(escape = F)
+```
+
+| doc_id |  id | pattern             | context                                                                                                                                                                                                                                                      |
+|:-------|----:|:--------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1      |   1 | political system    | thinking of Washington DC politicians. The idea of accepting another viewpoint, much less another economic or `political system` , is intolerable among Washington elites. Today intolerance is deeply imbedded in both Washington’s international relations |
+| 1      |   2 | political divisions | Today intolerance is deeply imbedded in both Washington’s international relations and own domestic party politics, where `political divisions` are stark and ideology itself is split along sharp lines of incompatible duality. At a level                  |
+| 1      |   3 | political ideology  | and ideology itself is split along sharp lines of incompatible duality. At a level deeper than `political ideology` is philosophy. Among the Washington elite, it is all about opposites, polarities, exclusion, expulsion, and conflicting                  |
+
+``` r
+set.seed(99)
+textsearch::find_lex(query = parts,
+                     text = tif$text,
+                     doc_id = tif$doc_id,
+                     window = 15,
+                     highlight = c('`', '`')) %>%
+  sample_n(3) %>%
+  knitr::kable(escape = F)
+```
+
+| doc_id |  id | pattern  | context                                                                                                                                                                                                                  |
+|:-------|----:|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 65     | 432 | part     | time to end the show like we do every week with Can’t Let It Go, the `part` of the show where we talk about things from the week we cannot stop talking about,                                                           |
+| 45     | 289 | partisan | political views to pupils. In some circumstances, it may be appropriate for external agencies to express `partisan` political views to pupils. Pupils must understand that these are contested views and still receive a |
+| 91     | 534 | parts    | growth and increasing prosperity,” and at the same time “a period of shrinking inequality in many `parts` of the world.” What kept inequality in check, the report notes, was policies that ensured minimum              |
+
+## Annotated corpus search
+
+### Annotate corpus
 
 ``` r
 setwd(locald)
 udmodel <- udpipe::udpipe_load_model('english-ewt-ud-2.3-181115.udpipe')
 
-anno <- news %>% 
+annotation <- tif %>% 
   text2df::tif2sentence() %>%
   text2df::tif2token() %>%
-  #text2df::token2mwe(mwe = MWE) %>%
   text2df::token2annotation(model = udmodel)
 ```
-
-## Search process
 
 ### Build inline TIF
 
 ``` r
-inline_tif <- textsearch::build_inline(df = anno, 
+inline_tif <- textsearch::build_inline(df = annotation, 
                                        form = 'token', 
                                        tag = 'xpos')
 
 strwrap(inline_tif$text[1], width = 60)[1:5]
 ```
 
-    ## [1] "DT~The JJ~economic NNS~numbers IN~that NN~government"      
-    ## [2] "NNS~statisticians RB~routinely VB~produce NN~matter .~."   
-    ## [3] "NNS~Statistics VBP~are JJ~fundamental IN~to"               
-    ## [4] "VBG~understanding WP~what VBZ~is VBG~going RP~on IN~in"    
-    ## [5] "DT~the NN~economy ,~, VBG~including DT~the NN~health IN~of"
-
-### Optionally set tag mappings
-
-``` r
-textsearch::mapping_generic
-```
-
-    ## $V
-    ## [1] "VB"  "VBD" "VBG" "VBN" "VBP" "VBZ"
-    ## 
-    ## $N
-    ## [1] "NN"   "NNP"  "NNPS" "NNS" 
-    ## 
-    ## $ADJ
-    ## [1] "JJ"  "JJR" "JJS"
-    ## 
-    ## $ADV
-    ## [1] "RB"  "RBR" "RBS"
+    ## [1] "CD~Fifty NNS~years RB~ago IN~on NNP~February CD~21 ,~,"    
+    ## [2] "CD~1972 ,~, CC~then-US NNP~president NNP~Richard NNP~Nixon"
+    ## [3] "VBD~arrived IN~in NNP~Beijing ,~, VBG~breaking DT~the"     
+    ## [4] "NN~ice IN~of DT~the NNP~Cold NNP~War .~. IN~By CD~1979"    
+    ## [5] "JJ~formal NNS~relations VBD~were VBN~established .~. DT~A"
 
 ### Build inline query
 
@@ -108,171 +150,72 @@ found <- textsearch::find_gramx(tif = inline_tif, query = search)
 found %>% slice(3:9) %>% knitr::kable()
 ```
 
-| doc_id | construction                           | start |   end |
-|:-------|:---------------------------------------|------:|------:|
-| 15     | VBD\~was VBN\~beaten IN\~by            | 14082 | 14106 |
-| 24     | VBD\~was VBN\~cut IN\~by               |  1499 |  1520 |
-| 27     | VBZ\~is VBN\~established IN\~by        |  9483 |  9511 |
-| 30     | VBD\~was VBN\~fueled IN\~by            |   737 |   761 |
-| 35     | VBZ\~is RB\~not VBN\~authorized IN\~by |    26 |    60 |
-| 35     | VBZ\~is RB\~not VBN\~authorized IN\~by |  4777 |  4811 |
-| 39     | VBZ\~is RB\~primarily VBN\~held IN\~by |  2123 |  2157 |
+| doc_id | construction                         | start |   end |
+|:-------|:-------------------------------------|------:|------:|
+| 5      | VBD\~was VBN\~murdered IN\~by        | 23938 | 23964 |
+| 10     | VBZ\~is VBN\~guided IN\~by           |  2962 |  2985 |
+| 11     | VBZ\~is VBN\~controlled IN\~by       | 12602 | 12629 |
+| 12     | VBZ\~is VBN\~defined IN\~by          |  4571 |  4595 |
+| 16     | VBD\~was VBN\~impacted IN\~by        |  4415 |  4441 |
+| 16     | VBZ\~is RB\~not VBN\~retained IN\~by |  7808 |  7840 |
+| 20     | VBZ\~is VBN\~espoused IN\~by         | 23339 | 23364 |
 
 ### Add sentential context
 
 ``` r
 f_sentence <- textsearch::add_context(gramx = found,
-                                      df = anno,
+                                      df = annotation,
                                       form = 'token', 
                                       tag = 'xpos',
                                       highlight = '`')
 
-f_sentence %>% slice(3:9) %>% knitr::kable()
+set.seed(99)
+f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                           | text                                                                                                                                              |
-|:-------|------------:|:---------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
-| 15     |          62 | VBD\~was VBN\~beaten IN\~by            | A gay rights activist `was beaten by` the police in October , showing what activists said was increased targeting by the police since July 25 .   |
-| 24     |           5 | VBD\~was VBN\~cut IN\~by               | Similarly , the 2021 forecast for global growth `was cut by` 0.1 percentage points to 5.1 % .                                                     |
-| 27     |          43 | VBZ\~is VBN\~established IN\~by        | ” We acknowledge the value of the SME100 Award , which `is established by` a globally-reputed organization .                                      |
-| 30     |           4 | VBD\~was VBN\~fueled IN\~by            | Fashion saw a big boost last year with consumer spending that `was fueled by` government stimulus , pent-up demand and a stay-at-home mentality . |
-| 35     |           1 | VBZ\~is RB\~not VBN\~authorized IN\~by | This communication `is not authorized by` any candidate or candidate’s committee .                                                                |
-| 35     |          20 | VBZ\~is RB\~not VBN\~authorized IN\~by | This communication `is not authorized by` any candidate or candidate’s committee .                                                                |
-| 39     |           8 | VBZ\~is RB\~primarily VBN\~held IN\~by | Student loan debt `is primarily held by` borrowers who were raised in higher-income households and now live in higher-income households .         |
+| doc_id | sentence_id | construction                            | text                                                                                                                                                                                                                                          |
+|:-------|------------:|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 69     |          29 | VBZ\~is VBN\~undercut IN\~by            | The argument , she wrote , “ `is undercut by` an utter dearth of absentee fraud . ”                                                                                                                                                           |
+| 87     |          18 | VBZ\~is VBN\~driven IN\~by              | “ Since Trump wants to run for office again , the timeline of the app `is driven by` political objectives – not by readiness of the platform , ” said Jennifer Grygiel , a professor of communications at Syracuse University .               |
+| 48     |          40 | VBZ\~is VBN\~powered IN\~by             | This clearly shows that CCC `is powered by` foreign powers and they are only puppets waiting for instructions from their masters .                                                                                                            |
+| 69     |          69 | VBD\~was VBN\~defined IN\~by            | In a statement , Andrew Bates , a White House spokesman , defended Judge Childs’s record , noting that when she served on South Carolina’s Workers ’ Compensation Commission , “ her tenure `was defined by` fighting for injured workers . ” |
+| 80     |          32 | VBD\~was RB\~not VBN\~vanquished IN\~by | Fascism , the political ideology that denies all rights to individuals in their relations with the state , `was not vanquished by` World War II , only subdued temporarily .                                                                  |
 
-### Recode constructions
-
-A simple noun phrase search:
+### Recode construction
 
 ``` r
-simple_np <- '(DT)?(ADJ|N)+(N)+'
-
-search_np <- textsearch::translate_query(x = simple_np,
-                                         mapping = textsearch::mapping_generic)
-```
-
-Concatenate and re-code `find_gramx()` results in annotated data frame:
-
-``` r
-found0 <- textsearch::find_gramx(tif = inline_tif, 
-                                 query = search_np)
-
-# this needs a sep parameter -- 
-new_anno <- textsearch::recode_gramx(df = anno,
-                                     gramx = found0,
+new_annotation <- textsearch::recode_gramx(df = annotation,
+                                     gramx = found,
                                      form = 'token', 
                                      tag = 'xpos',
                                      
                                      col = 'xpos',
-                                     new_cat = 'NPhrase',
+                                     new_cat = 'by_passive',
                                      renumber = T)
 ```
 
 ``` r
-new_anno %>% 
-  select(doc_id, sentence_id, token_id,
-         term_id, token, xpos) %>%
-  slice(1:10) %>%
+new_annotation %>%
+  group_by(doc_id, sentence_id) %>%
+  filter(any(xpos == 'by_passive')) %>%
+  mutate(token = ifelse(xpos == 'by_passive', 
+                        paste0('`', token, '`'), 
+                        token)) %>%
+  summarize(example = paste0(token, collapse = ' ')) %>%
+  ungroup() %>%
+  sample_n(5) %>%
   knitr::kable()
 ```
 
-| doc_id | sentence_id | token_id | term_id | token                    | xpos    |
-|:-------|------------:|:---------|--------:|:-------------------------|:--------|
-| 1      |           1 | 1        |       1 | The_economic_numbers     | NPhrase |
-| 1      |           1 | 2        |       2 | that                     | IN      |
-| 1      |           1 | 3        |       3 | government_statisticians | NPhrase |
-| 1      |           1 | 4        |       4 | routinely                | RB      |
-| 1      |           1 | 5        |       5 | produce                  | VB      |
-| 1      |           1 | 6        |       6 | matter                   | NN      |
-| 1      |           1 | 7        |       7 | .                        | .       |
-| 1      |           2 | 1        |       8 | Statistics               | NNS     |
-| 1      |           2 | 2        |       9 | are                      | VBP     |
-| 1      |           2 | 3        |      10 | fundamental              | JJ      |
+    ## `summarise()` has grouped output by 'doc_id'. You can override using the
+    ## `.groups` argument.
 
-## Some Biber (1988) odds/ends
+| doc_id | sentence_id | example                                                                                                                                                                                                                                       |
+|:-------|------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 69     |          69 | In a statement , Andrew Bates , a White House spokesman , defended Judge Childs’s record , noting that when she served on South Carolina’s Workers ’ Compensation Commission , “ her tenure `was_defined_by` fighting for injured workers . ” |
+| 78     |          16 | The researchers developed a measure of anti-establishment orientation that `was_characterized_by` conspiratorial , populist , and Manichean worldviews .                                                                                      |
+| 69     |          29 | The argument , she wrote , “ `is_undercut_by` an utter dearth of absentee fraud . ”                                                                                                                                                           |
+| 30     |          39 | As vice president , he became Jackson’s heir apparent , and with Old Hickory’s blessing , he `was_nominated_by` the Democratic Party to be the next president of the United States .                                                          |
+| 48     |          55 | The new party ( the old wine in new bottles ) `was_formed_by` Mr Morgan Tsvangirayi and Mr Gibson Sibanda on the back of the labour movement .                                                                                                |
 
-From: Biber, D. (1988). *Variation across speech and writing*. Cambridge
-University Press.
-
-### Tags
-
-``` r
-anno[, biber := textsearch::biber_tags(token = anno$token, 
-                                       tag = anno$xpos)]
-```
-
-Eg:
-
-``` r
-anno %>% 
-  select(doc_id, sentence_id, token, 
-         xpos, biber) %>%
-  slice(1:10) %>%
-  knitr::kable()
-```
-
-| doc_id | sentence_id | token         | xpos | biber |
-|:-------|------------:|:--------------|:-----|:------|
-| 1      |           1 | The           | DT   | ART   |
-| 1      |           1 | economic      | JJ   | JJ    |
-| 1      |           1 | numbers       | NNS  | NNS   |
-| 1      |           1 | that          | IN   | DEM   |
-| 1      |           1 | government    | NN   | NN    |
-| 1      |           1 | statisticians | NNS  | NNS   |
-| 1      |           1 | routinely     | RB   | RB    |
-| 1      |           1 | produce       | VB   | VB    |
-| 1      |           1 | matter        | NN   | NN    |
-| 1      |           1 | .             | .    | CLP   |
-
-### Mappings
-
-``` r
-textsearch::mapping_biber
-```
-
-    ## $V
-    ## [1] "VB"  "VBD" "VBG" "VBN" "VBP" "VBZ"
-    ## 
-    ## $N
-    ## [1] "NN"   "NNP"  "NNPS" "NNS" 
-    ## 
-    ## $ADJ
-    ## [1] "JJ"  "JJR" "JJS"
-    ## 
-    ## $ADV
-    ## [1] "RB"  "RBR" "RBS"
-    ## 
-    ## $AUX
-    ## [1] "MODAL" "HAVE"  "BE"    "DO"    "S"    
-    ## 
-    ## $PRO
-    ## [1] "SUBJPRO"   "OBJPRO"    "POSSPRO"   "REFLEXPRO" "YOU"       "HER"      
-    ## [7] "IT"       
-    ## 
-    ## $DET
-    ## [1] "ART"  "DEM"  "QUAN" "NUM" 
-    ## 
-    ## $ALLP
-    ## [1] "CLP" ","  
-    ## 
-    ## $PRV
-    ## [1] "SUAPRV" "PRV"   
-    ## 
-    ## $PUB
-    ## [1] "SUAPUB" "PUB"   
-    ## 
-    ## $SUA
-    ## [1] "SUA"    "SUAPUB" "SUAPRV"
-
-### Some features
-
-``` r
-zz <- list(f18 = 'BE (ADV)* VBN by',
-           f29 = 'NOUN that (ADV)* VBD', # *
-           f19 = 'BE (DET|POSSPRO|PREP|ADJ)',
-           f22 = 'ADJ that',
-           f30 = 'NOUN that (DET|SUBJPRO|POSSPRO)', # *
-           f33 = 'PREP WHP',
-           f62 = 'to (ADV)+ VB',
-           f61 = 'PREP CL-P') # *
-```
+## Summary

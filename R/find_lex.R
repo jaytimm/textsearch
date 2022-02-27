@@ -46,6 +46,9 @@ find_lex <- function(query,
   df[, lhs := stringi::stri_reverse(lhs)]
   df[is.na(df)] <- ''
 
+  ## by group --
+  df[, id := .I]
+
   # highlight procedure
   if(!is.null(highlight)) {
 
@@ -60,16 +63,18 @@ find_lex <- function(query,
 
       df[, context := trimws(paste(lhs, pattern, rhs, sep = ' '))] }
 
-  # sentence_id
-  if(grepl('\\.', df$doc_id[1])) {
-    df[, sentence_id := gsub('^.*\\.', '', doc_id)]
-    df[, doc_id := gsub('\\..*$', '', doc_id)]
-    df[, c('doc_id',
-           'sentence_id',
-           'pattern',
-           'context')]
-  } else{
-    df[, c('doc_id', 'pattern', 'context')] }
+  # # sentence_id
+  # if(grepl('\\.', df$doc_id[1])) {
+  #   df[, sentence_id := gsub('^.*\\.', '', doc_id)]
+  #   df[, doc_id := gsub('\\..*$', '', doc_id)]
+  #   df[, c('doc_id',
+  #          'sentence_id',
+  #          'pattern',
+  #          'context')]
+  # } else{
+    df[, c('doc_id', 'id', 'pattern', 'context')]
+    #}
+
 }
 
 
