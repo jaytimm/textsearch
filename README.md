@@ -7,15 +7,13 @@ annotated corpus search.
 
 For dependency-based search, see [this lovely package]().
 
-## Installation:
+## Installation
 
 You can download the development version from GitHub with:
 
 ``` r
 remotes::install_github("jaytimm/textsearch")
 ```
-
-## Usage:
 
 ## TIF search
 
@@ -90,11 +88,11 @@ textsearch::find_lex(query = parts,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern | context                                                                                                                                                                                                                                   |
-|:-------|----:|:--------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 65     | 432 | party   | it’s just sort of the types of people that appeal to the different factions inside the `party` . And that will definitely affect how, you know, well or not Congress can function. MONTANARO:                                             |
-| 46     | 289 | part    | and staff can understand and discuss sensitive topics, including terrorism and the extremist ideas that are `part` of terrorist ideology. Schools can build pupils’ resilience to radicalisation by providing an environment for debating |
-| 88     | 534 | parts   | Toyota had to suspend work or cut back hours at U.S. auto factories, waiting for the `parts` to arrive. The workers’ paycheck shrank. Thanks a bunch, GOPers.                                                                             |
+| doc_id |  id | pattern | context                                                                                                                                                                                                                                            |
+|:-------|----:|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 93     | 432 | Party   | territorial and federal governments march further and faster down the road to full authoritarianism, Yukon Freedom `Party` thinks it is time to check in with Yukoners directly,” a news release from the party                                    |
+| 55     | 289 | Parti   | state seats that Opposition parties are defending, which technically excluded Larkin as its incumbent was from `Parti` Pribumi Bersatu Malaysia (Bersatu). Shortly after Muda’s announcement yesterday, however, deputy Johor PKR chief Jimmy Puah |
+| 57     | 300 | part    | my family have collected memorabilia, from major sports teams to the American armed forces. It was `part` of the culture I grew up around, especially with my grandfather who was a Civil War                                                      |
 
 ## Annotated corpus search
 
@@ -149,10 +147,10 @@ found %>% slice(3:9) %>% knitr::kable()
 | doc_id | construction                          | start |   end |
 |:-------|:--------------------------------------|------:|------:|
 | 5      | VBD\~was VBN\~murdered IN\~by         | 23938 | 23964 |
-| 7      | VBD\~was VBN\~officiated IN\~by       | 19503 | 19531 |
-| 8      | VBD\~was VBN\~required IN\~by         |  8182 |  8208 |
-| 8      | VBD\~was VBN\~driven IN\~by           | 14181 | 14205 |
-| 8      | VBD\~was RB\~all VBN\~designed IN\~by | 16287 | 16320 |
+| 8      | VBD\~was VBN\~officiated IN\~by       | 19503 | 19531 |
+| 9      | VBD\~was VBN\~required IN\~by         |  8182 |  8208 |
+| 9      | VBD\~was VBN\~driven IN\~by           | 14181 | 14205 |
+| 9      | VBD\~was RB\~all VBN\~designed IN\~by | 16287 | 16320 |
 | 12     | VBZ\~is VBN\~guided IN\~by            |  2962 |  2985 |
 | 13     | VBZ\~is VBN\~controlled IN\~by        | 12602 | 12629 |
 
@@ -169,25 +167,25 @@ set.seed(99)
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                            | text                                                                                                                                                                                                                                                                                                                              |
-|:-------|------------:|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 87     |          18 | VBZ\~is VBN\~driven IN\~by              | “ Since Trump wants to run for office again , the timeline of the app `is driven by` political objectives – not by readiness of the platform , ” said Jennifer Grygiel , a professor of communications at Syracuse University .                                                                                                   |
-| 60     |           3 | VBZ\~is RB\~usually VBN\~ignored IN\~by | However , the problematic political ideology that underpins the show `is usually ignored by` viewers and critics alike .                                                                                                                                                                                                          |
-| 78     |          41 | VBD\~was VBN\~authored IN\~by           | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , `was authored by` Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi . |
-| 46     |         154 | VBZ\~is VBN\~hosted IN\~by              | It `is hosted by` an external organisation which does not seem to have an obvious partisan political affiliation .                                                                                                                                                                                                                |
-| 67     |          10 | VBZ\~is VBN\~protected IN\~by           | The material on this site `is protected by` copyright law and may not be reproduced , distributed , transmitted , cached or otherwise used .                                                                                                                                                                                      |
+| doc_id | sentence_id | construction                              | text                                                                                                                                                                                                                                                                                                                                                                                          |
+|:-------|------------:|:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 90     |           6 | VBD\~was RB\~also VBN\~celebrated IN\~by  | Despite being harshly criticized by certain sectors , the politician and economist negotiated the end of the guerrilla groups that plagued his country for more than half a century and achieved an agreement , that was not only acclaimed with his receiving the 2016 Nobel Peace Prize , but `was also celebrated by` Pope Francis in his Apostolic Visit to Colombia the following year . |
+| 62     |           7 | VBD\~was VBN\~given IN\~by                | The lie `was given by` those in the East German government that the Wall was meant not keep people in , but to keep the taint of Western democracy out , even as guns and binoculars , spies and informants were turned on their own people .                                                                                                                                                 |
+| 76     |          42 | VBD\~was VBN\~authored IN\~by             | The study , “ The Role of Anti-Establishment Orientations During the Trump Presidency “ , `was authored by` Adam M. Enders and Joseph E. Uscinski .                                                                                                                                                                                                                                           |
+| 48     |           3 | VBZ\~is RB\~often VBN\~perpetuated IN\~by | Critical race theory argues that racism is a part of everyday life and `is often perpetuated by` legal policies and practices .                                                                                                                                                                                                                                                               |
+| 68     |           1 | VBZ\~is VBN\~seen IN\~by                  | The judge `is seen by` some as a long shot for the Supreme Court , but supporters say her bipartisan backing and the appeal of her humble ascent should not be overlooked .                                                                                                                                                                                                                   |
 
 ### Recode construction
 
 ``` r
 new_annotation <- textsearch::recode_gramx(df = annotation,
-                                     gramx = found,
-                                     form = 'token', 
-                                     tag = 'xpos',
-                                     
-                                     col = 'xpos',
-                                     new_cat = 'by_passive',
-                                     renumber = T)
+                                           gramx = found,
+                                           form = 'token', 
+                                           tag = 'xpos',
+                                           
+                                           col = 'xpos',
+                                           new_cat = 'by_passive',
+                                           renumber = T)
 ```
 
 ``` r
@@ -203,12 +201,12 @@ new_annotation %>%
   knitr::kable()
 ```
 
-| doc_id | sentence_id | example                                                                                                                                                                                                                                       |
-|:-------|------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 8      |          39 | She said she had reviewed the curriculum extensively , and while she understood the district `was_required_by` the state to offer the course , board policy was to have it be vetted by the curriculum committee first .                      |
-| 69     |          69 | In a statement , Andrew Bates , a White House spokesman , defended Judge Childs’s record , noting that when she served on South Carolina’s Workers ’ Compensation Commission , “ her tenure `was_defined_by` fighting for injured workers . ” |
-| 77     |          18 | System justification `is_characterized_by` defending and justifying the societal status quo .                                                                                                                                                 |
-| 69     |          29 | The argument , she wrote , “ `is_undercut_by` an utter dearth of absentee fraud . ”                                                                                                                                                           |
-| 32     |          39 | As vice president , he became Jackson’s heir apparent , and with Old Hickory’s blessing , he `was_nominated_by` the Democratic Party to be the next president of the United States .                                                          |
+| doc_id | sentence_id | example                                                                                                                                                                                                                                                                                                                           |
+|:-------|------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 82     |          55 | But this `is_counterbalanced_by` perhaps the worst point in Rick Scott’s 60-page agenda : “ All Americans should pay some income tax to have skin in the game , even if a small amount .                                                                                                                                          |
+| 69     |          45 | In San Francisco , Mr. Boudin argued that the effort to recall him `was_fueled_by` politics , not voters ’ worries about crime .                                                                                                                                                                                                  |
+| 76     |          41 | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , `was_authored_by` Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi . |
+| 68     |          43 | Her experience as a trial judge `is_also_cited_by` her supporters as an asset .                                                                                                                                                                                                                                                   |
+| 33     |          39 | As vice president , he became Jackson’s heir apparent , and with Old Hickory’s blessing , he `was_nominated_by` the Democratic Party to be the next president of the United States .                                                                                                                                              |
 
 ## Summary

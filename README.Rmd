@@ -38,7 +38,7 @@ https://aclanthology.org/W17-3001.pdf
 
 
 
-## Installation:
+## Installation
 
 You can download the development version from GitHub with:
 
@@ -47,8 +47,6 @@ remotes::install_github("jaytimm/textsearch")
 ```
 
 
-
-## Usage:
 
 ## TIF search
 
@@ -184,13 +182,13 @@ f_sentence %>% sample_n(5) %>% knitr::kable()
 
 ```{r}
 new_annotation <- textsearch::recode_gramx(df = annotation,
-                                     gramx = found,
-                                     form = 'token', 
-                                     tag = 'xpos',
-                                     
-                                     col = 'xpos',
-                                     new_cat = 'by_passive',
-                                     renumber = T)
+                                           gramx = found,
+                                           form = 'token', 
+                                           tag = 'xpos',
+                                           
+                                           col = 'xpos',
+                                           new_cat = 'by_passive',
+                                           renumber = T)
 ```
 
 
