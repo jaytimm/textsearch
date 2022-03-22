@@ -179,6 +179,13 @@ new_annotation <- textsearch::recode_gramx(df = annotation,
 ```
 
 
+```{r}
+eg <- new_annotation[, if(any(token %in% 'is_thought_by')) .SD, 
+                      by = list(doc_id, sentence_id)]
+
+knitr::kable(eg[, token_id:xpos])
+```
+
 
 ```{r eval=FALSE, include=FALSE}
 #doc = 4; sentence = 23; df = new_annotation
@@ -200,7 +207,7 @@ see_example <- function(df,
 
 
 
-```{r message=FALSE, warning=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 new_annotation %>%
   group_by(doc_id, sentence_id) %>%
   filter(any(xpos == 'by_passive')) %>%

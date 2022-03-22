@@ -18,6 +18,10 @@ recode_gramx(
 
 \item{df}{An annotated corpus df}
 
+\item{form}{A character string}
+
+\item{tag}{A character string}
+
 \item{recode_col}{A string}
 
 \item{recode_cat}{A string}

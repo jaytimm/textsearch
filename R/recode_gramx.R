@@ -3,6 +3,8 @@
 #' @name recode_gramx
 #' @param df An annotated corpus df
 #' @param gramx A DF
+#' @param form A character string
+#' @param tag A character string
 #' @param recode_col A string
 #' @param recode_cat A string
 #' @return A data frame

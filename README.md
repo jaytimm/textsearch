@@ -40,17 +40,17 @@ list(Date = tif$date[1],
     ## [1] "2022-03-21"
     ## 
     ## $Source
-    ## [1] "ArtReview"
+    ## [1] "Cal Coast News"
     ## 
     ## $Title
-    ## [1] "Why the Artworld Must Stand with Palestine"
+    ## [1] "Somber departures from war-torn Ukraine"
     ## 
     ## $Article
-    ## [1] "At the Academy Awards in 1999, Elia Kazan received an"     
-    ## [2] "honorary Oscar in recognition of his profound contribution"
-    ## [3] "to cinema. As a director, Kazan often broached the brutal" 
-    ## [4] "social realities of postwar America – his films narrated"  
-    ## [5] "the era’s complex conditions, relations and struggles that"
+    ## [1] "For hours upon hours, Ukrainian refugees speak to one"      
+    ## [2] "another in Russian while fleeing their cities and towns,"   
+    ## [3] "and often, their country. Beside a CalCoastNews reporter, a"
+    ## [4] "woman, her mother and her daughter boarded a train"         
+    ## [5] "departing the Ukrainian capital Kyiv for Lviv, the leading"
 
 ### Extract lexical patterns
 
@@ -70,11 +70,11 @@ textsearch::find_lex(query = pols,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern            | context                                                                                                                                                                                                                                       |
-|:-------|----:|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1      |   1 | political ideology | Communist Party USA, or for being communist sympathisers. From official literature to the popular press, such `political ideology` was relentlessly depicted as dangerous. And this campaign of leftist suppression never really ended; it is |
-| 1      |   2 | political scandal  | noxious atmosphere around expressions of solidarity with Palestine means that an anonymous blog can incite a `political scandal` all the way up to the German minister of culture, spurring reactionary op-eds in respected newspapers,       |
-| 2      |   3 | political ideology | The military unit has and/or previously had ties to far-right `political ideology` . Whether or not Russia is battling Nazism, as claimed by Putin, its bombs, missiles, mortars                                                              |
+| doc_id |  id | pattern              | context                                                                                                                                                                                                                                 |
+|:-------|----:|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1      |   1 | political ideology   | The military unit has and/or previously had ties to far-right `political ideology` . Whether or not Russia is battling Nazism, as claimed by Putin, its bombs, missiles, mortars                                                        |
+| 2      |   2 | political ideologies | financial improprieties, but rather their continuous rape of democratic principles and failure to adhere to known `political ideologies` . Despite their names not appearing on the ballot paper, they believe that once elected, the   |
+| 2      |   3 | political parties    | no loyalty whatsoever. Unfortunately, some Senior Advocates of Nigeria (SAN) agree with them, reasoning pedantically that `political parties` stand for nothing and are mere “vehicles” in which aspirants ride to office! Back in 1983 |
 
 ``` r
 set.seed(99)
@@ -87,11 +87,11 @@ textsearch::find_lex(query = parts,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern | context                                                                                                                                                                                                                                                 |
-|:-------|----:|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 54     | 289 | Party   | In 1935, the Agrarian Party, now the Centre Party, chose to ally itself with the Labour `Party` . “This political agreement was crucial to preventing anyone from harbouring authoritarian ambitions here.” Wolff also                                  |
-| 60     | 300 | parties | `parties` , Prime Minister Narendra Modi on Saturday said that “blind opposition, continuous opposition, acute frustration and                                                                                                                          |
-| 5      |  22 | part    | Zionism as “fundamentally different from those projects of European settler-colonialism” such as Algeria. His opportunism is `part` of a long tradition of high-profile British social democrats policing the boundaries of acceptable public discourse |
+| doc_id |  id | pattern | context                                                                                                                                                                                                                      |
+|:-------|----:|:--------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 62     | 289 | part    | down to moderate versus progressive. But what Pew actually found is that Democrats, for the most `part` , actually agree more so on the issues, which is a change from past years from,                                      |
+| 64     | 300 | parts   | the Democratic spectrum. By most standards, he does tack more moderate. He wants to grow some `parts` of the NYPD. He seeks corporate partners like JetBlue. And he discourages higher taxes on the                          |
+| 4      |  22 | party   | Jones describes Corbyn as “mulish” in his refusal to follow advice and his leadership of the `party` as “shambolic.” He approvingly cites Labour sources who describe Corbyn’s leadership as “clearly dysfunctional” and say |
 
 ## Annotated corpus search
 
@@ -117,11 +117,11 @@ inline_tif <- textsearch::build_inline(df = annotation,
 strwrap(inline_tif$text[1], width = 60)[1:5]
 ```
 
-    ## [1] "At/IN the/DT Academy/NNP Awards/NNP in/IN 1999/CD ,/,"     
-    ## [2] "Elia/NNP Kazan/NNP received/VBD an/DT honorary/JJ Oscar/NN"
-    ## [3] "in/IN recognition/NN of/IN his/PRP$ profound/JJ"           
-    ## [4] "contribution/NN to/IN cinema/NN ./. As/IN a/DT director/NN"
-    ## [5] ",/, Kazan/NNP often/RB broached/VBD the/DT brutal/JJ"
+    ## [1] "For/IN hours/NNS upon/IN hours/NNS ,/, Ukrainian/JJ"       
+    ## [2] "refugees/NNS speak/VBP to/IN one/CD another/DT in/IN"      
+    ## [3] "Russian/JJ while/IN fleeing/VBG their/PRP$ cities/NNS"     
+    ## [4] "and/CC towns/NNS ,/, and/CC often/RB ,/, their/PRP$"       
+    ## [5] "country/NN ./. Beside/IN a/DT CalCoastNews/NNP reporter/NN"
 
 ### Extract lexico-grammatical constructions
 
@@ -135,13 +135,13 @@ found %>% slice(3:9) %>% knitr::kable()
 
 | doc_id | construction                               | start |   end |
 |:-------|:-------------------------------------------|------:|------:|
-| 5      | was/VBD issued/VBN by/IN                   | 11804 | 11828 |
-| 5      | was/VBD not/RB founded/VBN by/IN           | 20977 | 21009 |
-| 5      | was/VBD regularly/RB used/VBN by/IN        | 22728 | 22763 |
-| 5      | was/VBD successfully/RB co-opted/VBN by/IN | 23576 | 23618 |
-| 7      | was/VBD hailed/VBN by/IN                   |  3940 |  3964 |
-| 7      | was/VBD hailed/VBN by/IN                   |  7523 |  7547 |
-| 7      | was/VBD marked/VBN by/IN                   | 22375 | 22399 |
+| 4      | was/VBD not/RB founded/VBN by/IN           | 20977 | 21009 |
+| 4      | was/VBD regularly/RB used/VBN by/IN        | 22728 | 22763 |
+| 4      | was/VBD successfully/RB co-opted/VBN by/IN | 23576 | 23618 |
+| 6      | was/VBD hailed/VBN by/IN                   |  3940 |  3964 |
+| 6      | was/VBD hailed/VBN by/IN                   |  7523 |  7547 |
+| 6      | was/VBD marked/VBN by/IN                   | 22375 | 22399 |
+| 6      | was/VBD substituted/VBN by/IN              | 25343 | 25372 |
 
 ### Add sentential context
 
@@ -156,13 +156,13 @@ set.seed(99)
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                    | text                                                                                                                                                                                                                   |
-|:-------|------------:|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 79     |           1 | is/VBZ backed/VBN by/IN         | Legislation deemed partisan will now only be debated on the USGT floor if it `is backed by` a two-thirds majority vote .                                                                                               |
-| 50     |          27 | is/VBZ modeled/VBN by/IN        | “ In general , the public seems more willing to adhere to guidelines put forth by state leaders if the underlying rationale is clearly communicated and `is modeled by` leaders , ” Benjamin-Neelon wrote .            |
-| 71     |          16 | was/VBD characterized/VBN by/IN | The researchers developed a measure of anti-establishment orientation that `was characterized by` conspiratorial , populist , and Manichean worldviews .                                                               |
-| 28     |          74 | was/VBD conducted/VBN by/IN     | At the University of Wisconsin-Milwaukee , a study `was conducted by` doctoral student Amir Forati and master’s student Rachel Hansen on the geographical impact of social media in regards to the COVID-19 pandemic . |
-| 53     |          23 | is/VBZ thought/VBN by/IN        | Speaking in tongues `is thought by` charismatic or Pentecostal evangelicals to be the ability to speak in different or angelic languages to transmit a message from the divine .                                       |
+| doc_id | sentence_id | construction                        | text                                                                                                                                                                                                              |
+|:-------|------------:|:------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 82     |          34 | was/VBD revealed/VBN by/IN          | The state’s exclusionary purpose and effect `was revealed by` the map .                                                                                                                                           |
+| 51     |          23 | is/VBZ thought/VBN by/IN            | Speaking in tongues `is thought by` charismatic or Pentecostal evangelicals to be the ability to speak in different or angelic languages to transmit a message from the divine .                                  |
+| 69     |          42 | was/VBD authored/VBN by/IN          | The study , “ The Role of Anti-Establishment Orientations During the Trump Presidency “ , `was authored by` Adam M. Enders and Joseph E. Uscinski .                                                               |
+| 29     |          39 | was/VBD followed/VBN by/IN          | Throughout the last two decades , the increase in social support allocations `was followed by` an increase in social demands and more pressure on successive governments to address the issue of social justice . |
+| 55     |           4 | is/VBZ usually/RB ignored/VBN by/IN | However , the problematic political ideology that underpins the show `is usually ignored by` viewers and critics alike .                                                                                          |
 
 ### Recode construction
 
@@ -178,24 +178,40 @@ new_annotation <- textsearch::recode_gramx(df = annotation,
 ```
 
 ``` r
-new_annotation %>%
-  group_by(doc_id, sentence_id) %>%
-  filter(any(xpos == 'by_passive')) %>%
-  mutate(token = ifelse(xpos == 'by_passive', 
-                        paste0('`', token, '`'), 
-                        token)) %>%
-  summarize(example = paste0(token, collapse = ' ')) %>%
-  ungroup() %>%
-  sample_n(5) %>%
-  knitr::kable()
+eg <- new_annotation[, if(any(token %in% 'is_thought_by')) .SD, 
+                      by = list(doc_id, sentence_id)]
+
+knitr::kable(eg[, token_id:xpos])
 ```
 
-| doc_id | sentence_id | example                                                                                                                                                                                                                                                                                                                      |
-|:-------|------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 70     |          18 | System justification `is_characterized_by` defending and justifying the societal status quo .                                                                                                                                                                                                                                |
-| 66     |          17 | The teacher `is_paid_by` the union and the district is reimbursed for any administrative costs the employee accrues .                                                                                                                                                                                                        |
-| 7      |          27 | It is fair to wonder , as some commentators have , what the Macron of 2021 — a tough-talking defender of the nation who leans right and flouts neoliberal economic wisdom — has in common with the Macron of 2017 , who `was_hailed_by` the anglophone press as liberalism’s savior in the face of Western populist surges . |
-| 66     |           6 | While a similar bill `was_advanced_by` the Senate last year before stalling in the House , this year’s bill did not receive a committee hearing .                                                                                                                                                                            |
-| 30     |          39 | Throughout the last two decades , the increase in social support allocations `was_followed_by` an increase in social demands and more pressure on successive governments to address the issue of social justice .                                                                                                            |
+| token_id | token         | lemma         | upos  | xpos       |
+|:---------|:--------------|:--------------|:------|:-----------|
+| 1        | Speaking      | speak         | VERB  | VBG        |
+| 2        | in            | in            | ADP   | IN         |
+| 3        | tongues       | tongue        | NOUN  | NNS        |
+| 4        | is_thought_by | is_thought_by | AUX   | by_passive |
+| 5        | charismatic   | charismatic   | ADJ   | JJ         |
+| 6        | or            | or            | CCONJ | CC         |
+| 7        | Pentecostal   | Pentecostal   | ADJ   | JJ         |
+| 8        | evangelicals  | evangelical   | NOUN  | NNS        |
+| 9        | to            | to            | PART  | TO         |
+| 10       | be            | be            | AUX   | VB         |
+| 11       | the           | the           | DET   | DT         |
+| 12       | ability       | ability       | NOUN  | NN         |
+| 13       | to            | to            | PART  | TO         |
+| 14       | speak         | speak         | VERB  | VB         |
+| 15       | in            | in            | ADP   | IN         |
+| 16       | different     | different     | ADJ   | JJ         |
+| 17       | or            | or            | CCONJ | CC         |
+| 18       | angelic       | angelic       | ADJ   | JJ         |
+| 19       | languages     | language      | NOUN  | NNS        |
+| 20       | to            | to            | PART  | TO         |
+| 21       | transmit      | transmit      | VERB  | VB         |
+| 22       | a             | a             | DET   | DT         |
+| 23       | message       | message       | NOUN  | NN         |
+| 24       | from          | from          | ADP   | IN         |
+| 25       | the           | the           | DET   | DT         |
+| 26       | divine        | divine        | NOUN  | NN         |
+| 27       | .             | .             | PUNCT | .          |
 
 ## Summary

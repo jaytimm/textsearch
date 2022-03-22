@@ -3,6 +3,8 @@
 #' @name add_context
 #' @param gramx output from find_gramx()
 #' @param df Annotion dataframe
+#' @param form A character string
+#' @param tag A character string
 #' @param highlight A boolean
 #' @return A data frame
 #'

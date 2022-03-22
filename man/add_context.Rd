@@ -11,6 +11,10 @@ add_context(gramx, df, form = "token", tag = "xpos", highlight = NULL)
 
 \item{df}{Annotion dataframe}
 
+\item{form}{A character string}
+
+\item{tag}{A character string}
+
 \item{highlight}{A boolean}
 }
 \value{
