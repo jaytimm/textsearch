@@ -7,7 +7,7 @@ output:
 
 # textsearch
 
-A simple framework for searching corpora for text patterns in context.  At present, functions facilitate two types of search: (1) TIF (ie, raw text) search for lexical patterns in context, and (2) annotated corpus search for lexico-grammatical patterns in (sentential) context.  
+A simple framework for searching corpora for text patterns in context.  At present, functions facilitate two types of search: (1) TIF (ie, raw text) search for **lexical patterns** in context, and (2) annotated corpus search for **lexico-grammatical constructions** in (sentential) context.  
 
 
 ```{r include=FALSE}

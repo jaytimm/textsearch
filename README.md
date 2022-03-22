@@ -2,8 +2,9 @@
 
 A simple framework for searching corpora for text patterns in context.
 At present, functions facilitate two types of search: (1) TIF (ie, raw
-text) search for lexical patterns in context, and (2) annotated corpus
-search for lexico-grammatical patterns in (sentential) context.
+text) search for **lexical patterns** in context, and (2) annotated
+corpus search for **lexico-grammatical constructions** in (sentential)
+context.
 
 ## Installation
 
@@ -86,11 +87,11 @@ textsearch::find_lex(query = parts,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern  | context                                                                                                                                                                                                                      |
-|:-------|----:|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 80     | 432 | partisan | defining partisanship encourages rather than prevents senators from giving their own spin on what counts as `partisan` . “In fact, I think more words on the page means there’s a little bit more                            |
-| 53     | 289 | part     | is evangelicalism in the United States today? One place to begin is historian David Bebbington’s four- `part` definition of evangelicalism. In his 1989 book, Bebbington argued that evangelicals share a recognition of the |
-| 54     | 300 | Party    | acted as a political ally to the liberals and the Catholics.” During the 1920s the Liberal `Party` relied on political alliances in order to gain a majority in parliament. “The choice was between                          |
+| doc_id |  id | pattern | context                                                                                                                                                                                                                                                 |
+|:-------|----:|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 54     | 289 | Party   | In 1935, the Agrarian Party, now the Centre Party, chose to ally itself with the Labour `Party` . “This political agreement was crucial to preventing anyone from harbouring authoritarian ambitions here.” Wolff also                                  |
+| 60     | 300 | parties | `parties` , Prime Minister Narendra Modi on Saturday said that “blind opposition, continuous opposition, acute frustration and                                                                                                                          |
+| 5      |  22 | part    | Zionism as “fundamentally different from those projects of European settler-colonialism” such as Algeria. His opportunism is `part` of a long tradition of high-profile British social democrats policing the boundaries of acceptable public discourse |
 
 ## Annotated corpus search
 
@@ -138,9 +139,9 @@ found %>% slice(3:9) %>% knitr::kable()
 | 5      | was/VBD not/RB founded/VBN by/IN           | 20977 | 21009 |
 | 5      | was/VBD regularly/RB used/VBN by/IN        | 22728 | 22763 |
 | 5      | was/VBD successfully/RB co-opted/VBN by/IN | 23576 | 23618 |
-| 7      | is/VBZ sponsored/VBN by/IN                 |  3287 |  3313 |
-| 7      | was/VBD escorted/VBN by/IN                 |  8210 |  8236 |
-| 7      | was/VBD enchanted/VBN by/IN                | 13482 | 13509 |
+| 7      | was/VBD hailed/VBN by/IN                   |  3940 |  3964 |
+| 7      | was/VBD hailed/VBN by/IN                   |  7523 |  7547 |
+| 7      | was/VBD marked/VBN by/IN                   | 22375 | 22399 |
 
 ### Add sentential context
 
@@ -155,13 +156,13 @@ set.seed(99)
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                  | text                                                                                                                                                                                                                                                                                                                            |
-|:-------|------------:|:------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 72     |          41 | was/VBD authored/VBN by/IN    | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , was authored by Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi . |
-| 46     |          18 | was/VBD implemented/VBN by/IN | A new Household Pulse Survey was implemented by the Census Bureau during COVID-19 and contains rich questions on COVID-19 vaccination but does not ask about party identification .                                                                                                                                             |
-| 67     |          17 | is/VBZ paid/VBN by/IN         | The teacher is paid by the union and the district is reimbursed for any administrative costs the employee accrues .                                                                                                                                                                                                             |
-| 23     |         177 | is/VBZ espoused/VBN by/IN     | What would you say is the actual content of the ideology that is espoused by the Chinese party-state in recent years ?                                                                                                                                                                                                          |
-| 84     |          34 | was/VBD revealed/VBN by/IN    | The state’s exclusionary purpose and effect was revealed by the map .                                                                                                                                                                                                                                                           |
+| doc_id | sentence_id | construction                    | text                                                                                                                                                                                                                   |
+|:-------|------------:|:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 79     |           1 | is/VBZ backed/VBN by/IN         | Legislation deemed partisan will now only be debated on the USGT floor if it `is backed by` a two-thirds majority vote .                                                                                               |
+| 50     |          27 | is/VBZ modeled/VBN by/IN        | “ In general , the public seems more willing to adhere to guidelines put forth by state leaders if the underlying rationale is clearly communicated and `is modeled by` leaders , ” Benjamin-Neelon wrote .            |
+| 71     |          16 | was/VBD characterized/VBN by/IN | The researchers developed a measure of anti-establishment orientation that `was characterized by` conspiratorial , populist , and Manichean worldviews .                                                               |
+| 28     |          74 | was/VBD conducted/VBN by/IN     | At the University of Wisconsin-Milwaukee , a study `was conducted by` doctoral student Amir Forati and master’s student Rachel Hansen on the geographical impact of social media in regards to the COVID-19 pandemic . |
+| 53     |          23 | is/VBZ thought/VBN by/IN        | Speaking in tongues `is thought by` charismatic or Pentecostal evangelicals to be the ability to speak in different or angelic languages to transmit a message from the divine .                                       |
 
 ### Recode construction
 
@@ -189,12 +190,12 @@ new_annotation %>%
   knitr::kable()
 ```
 
-| doc_id | sentence_id | example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|:-------|------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 67     |          17 | The teacher `is_paid_by` the union and the district is reimbursed for any administrative costs the employee accrues .                                                                                                                                                                                                                                                                                                                                                                                             |
-| 72     |          41 | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , `was_authored_by` Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi .                                                                                                                                                                                 |
-| 67     |          16 | There have been some cases where a teacher `is_temporarily_hired_by` a union and allowed to work from their school building .                                                                                                                                                                                                                                                                                                                                                                                     |
-| 7      |          31 | For all the whining they do about cancel culture , republicans invented cancel culture . conservatives try to “ cancel ” people and institutions they disagree with all the time : Nike , Target , Dixie Chicks , NASCAR , keurig , Gillette , and French fries , a tall , yellow bird , mental health programs in schools , and books like “ The Story of Ruby Ridges , ” the true story of a 6-year-old who `was_escorted_by` federal marshals past a vicious white mob to desegregate her New Orleans school . |
-| 58     |          32 | This compassionate non-violent response `was_also_taught_by` the Buddha 600 years prior to Christ ; in fact Buddhism , like Jainism , rejects any type of violence to all forms of life .                                                                                                                                                                                                                                                                                                                         |
+| doc_id | sentence_id | example                                                                                                                                                                                                                                                                                                                      |
+|:-------|------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 70     |          18 | System justification `is_characterized_by` defending and justifying the societal status quo .                                                                                                                                                                                                                                |
+| 66     |          17 | The teacher `is_paid_by` the union and the district is reimbursed for any administrative costs the employee accrues .                                                                                                                                                                                                        |
+| 7      |          27 | It is fair to wonder , as some commentators have , what the Macron of 2021 — a tough-talking defender of the nation who leans right and flouts neoliberal economic wisdom — has in common with the Macron of 2017 , who `was_hailed_by` the anglophone press as liberalism’s savior in the face of Western populist surges . |
+| 66     |           6 | While a similar bill `was_advanced_by` the Senate last year before stalling in the House , this year’s bill did not receive a committee hearing .                                                                                                                                                                            |
+| 30     |          39 | Throughout the last two decades , the increase in social support allocations `was_followed_by` an increase in social demands and more pressure on successive governments to address the issue of social justice .                                                                                                            |
 
 ## Summary

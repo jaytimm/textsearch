@@ -21,7 +21,7 @@ add_context <- function(gramx,
 
   #### assume column here -- needs parameter --
   ## y[, inline := paste0(tag, '_', token, ' ')]
-  y[, inline := paste0(get(tag), '~', get(form), ' ')]
+  y[, inline := paste0(get(tag), '/', get(form), ' ')]
 
   y[, end := cumsum(nchar(inline)), by = list(doc_id)]
   y[, start := c(1, end[1:(length(end)-1)] + 1),
@@ -49,7 +49,7 @@ add_context <- function(gramx,
       p1 <- paste0('<span style="background-color:', highlight, '">')
       p2 <- '</span> '}
 
-    x3[, pattern := trimws(gsub('[A-Z_]+~', '', construction))]
+    x3[, pattern := trimws(gsub('/[A-Z_]+', '', construction))]
     x3[, text := gsub(pattern, paste0(p1, pattern, p2), text),
        by = list(doc_id, sentence_id, start)]
     x3[, pattern := NULL]
