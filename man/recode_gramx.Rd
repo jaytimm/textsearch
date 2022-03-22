@@ -9,9 +9,8 @@ recode_gramx(
   df,
   form = "token",
   tag = "xpos",
-  col = "xpos",
-  new_cat = "cx1",
-  renumber = T
+  recode_col = "xpos",
+  recode_cat = "cx1"
 )
 }
 \arguments{
@@ -19,11 +18,9 @@ recode_gramx(
 
 \item{df}{An annotated corpus df}
 
-\item{col}{A string}
+\item{recode_col}{A string}
 
-\item{new_cat}{A string}
-
-\item{renumber}{A boolean}
+\item{recode_cat}{A string}
 }
 \value{
 A data frame

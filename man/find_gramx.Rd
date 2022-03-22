@@ -4,12 +4,14 @@
 \alias{find_gramx}
 \title{Extract gramx from tif}
 \usage{
-find_gramx(tif, query)
+find_gramx(search, mapping = textsearch::mapping_generic, tif)
 }
 \arguments{
-\item{tif}{a tif}
-
 \item{search}{char string}
+
+\item{mapping}{A list}
+
+\item{tif}{a tif}
 }
 \value{
 A data frame

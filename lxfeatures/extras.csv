@@ -1,0 +1,18 @@
+	
+VBN	VBN | VBN_SUA | VBN_PRV | VBN_PUB
+VBG	VBG | VBG_SUA | VBG_PRV | VBG_PUB
+VB	VB | VB_SUA | VB_PRV | VB_PUB
+VBZ	VBZ | VBZ_SUA | VBZ_PRV | VBZ_PUB
+	
+ADV	see no. 42
+V	Any verb
+ADJ	see nos. 40, 41
+N	see nos. 14, 15, 16
+NUM	numerals
+ORD	ordinal numbers
+	
+	
+AUX	MODAL | DO | HAVE | BE | ‘s
+PRO	SUBJPRO | OBJPRO | POSSPRO | REFLEXPRO | you | her | it
+DET	ART | DEM | QUAN | NUM
+ALL-P	\\. | \\! | \\? | \\: | \\; | \\ - | \\,

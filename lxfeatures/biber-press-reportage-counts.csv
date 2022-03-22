@@ -1,0 +1,68 @@
+category_id,category,fid,feature,mean,min,max,sd
+A,Tense and aspect markers,1,PastTense,45.1,7,110,21.6
+A,Tense and aspect markers,2,PerfectAspectVerbs,8,3,14,2.8
+A,Tense and aspect markers,3,PresentTense,55.8,22,82,15.9
+B,Place and time adverbials,4,PlaceAdverbials,4.7,0,24,4.5
+B,Place and time adverbials,5,TimeAdverbials,6.5,1,13,3.1
+C,Pronouns and pro-verbs,6,FirstPersonPronouns,9.5,0,32,8.7
+C,Pronouns and pro-verbs,7,SecondPersonPronouns,1.1,0,5,1.4
+C,Pronouns and pro-verbs,8,ThirdPersonPronouns,28.7,5,57,13.2
+C,Pronouns and pro-verbs,9,PronounIT,5.8,1,13,2.9
+C,Pronouns and pro-verbs,10,DemonstrativePronouns,1.6,0,5,1.2
+C,Pronouns and pro-verbs,11,IndefinitePronouns,0.6,0,6,1
+C,Pronouns and pro-verbs,12,DoProVerb,1.3,0,5,1.3
+D,questions,13,WhQuestions,0,0,1,0.2
+E,Nominal forms,14,Nominalizations,19.2,5,43,9.3
+E,Nominal forms,15,Gerunds,7.8,3,16,3.2
+E,Nominal forms,16,Nouns,220.5,186,273,18.5
+F,passives,17,AgentlessPassives,11,2,22,4.6
+F,passives,18,ByPassives,1.6,0,5,1.2
+G,stative forms,19,BeMainVerb,20.7,10,38,5.6
+G,stative forms,20,ExistentialThere,1.8,0,5,1.3
+H,Subordination features,21,ThatVerbCompliments,3.3,0,10,2.4
+H,Subordination features,22,ThatAdjCompliments,0.1,0,1,0.3
+H,Subordination features,23,WhClauses,0.4,0,2,0.5
+H,Subordination features,24,Infinitives,13.8,5,22,4.3
+H,Subordination features,25,PresentParticipleClauses,0.6,0,3,0.7
+H,Subordination features,26,PastParticipleClauses,0.2,0,1,0.4
+H,Subordination features,27,PastPartWhizDeletions,3.1,0,14,2.3
+H,Subordination features,28,PresentPartWhizDeletions,2.5,0,6,1.4
+H,Subordination features,29,ThatRelativesSbj,0.2,0,1,0.4
+H,Subordination features,30,ThatRelativesObj,0.8,0,3,0.9
+H,Subordination features,31,WhRelativesSbj,2,0,4,1
+H,Subordination features,32,WhRelativesObj,1,0,3,1
+H,Subordination features,33,WhRelativesPiedPipe,0.6,0,3,0.8
+H,Subordination features,34,SentenceRelatives,0,0,0,0
+H,Subordination features,35,AdvSubCause,0.5,0,3,0.8
+H,Subordination features,36,AdvSubConcession,0.4,0,2,0.5
+H,Subordination features,37,AdvSubCondition,1.4,0,5,1.3
+H,Subordination features,38,AdvSubOther,1,0,3,0.8
+I,Adjectives and adverbs,39,Prepositions,116.6,90,148,13.1
+I,Adjectives and adverbs,40,AttributiveAdjectives,64.5,30,90,14
+I,Adjectives and adverbs,41,PredicativeAdjectives,3,0,8,1.8
+I,Adjectives and adverbs,42,Adverbs,52.8,27,83,12.2
+J,Lexical specificity,43,TypeTokenRatio,55.3,46,63,4.4
+J,Lexical specificity,44,WordLength,4.7,4.2,4.9,0.2
+K,Specialized lexical classes,45,Conjuncts,0.6,0,4,1
+K,Specialized lexical classes,46,Downtoners,1.6,0,5,1.4
+K,Specialized lexical classes,47,Hedges,0.2,0,1,0.4
+K,Specialized lexical classes,48,Amplifiers,0.9,0,4,1.1
+K,Specialized lexical classes,49,Emphatics,4.2,1,10,2.1
+K,Specialized lexical classes,50,DiscourseParticles,0,0,1,0.2
+K,Specialized lexical classes,51,Demonstratives,7.4,2,16,2.8
+L,Modals,52,PossibilityModals,3.2,0,8,1.8
+L,Modals,53,NecessityModals,1.7,0,8,1.6
+L,Modals,54,PredictiveModals,6.1,1,13,2.8
+M,Specialized verb classes,55,PublicVerbs,12,2,28,6.5
+M,Specialized verb classes,56,PrivateVerbs,10.4,3,23,4.1
+M,Specialized verb classes,57,SuasiveVerbs,3,0,7,1.8
+M,Specialized verb classes,58,SeemVerbs,0.5,0,2,0.7
+N,Reduced or dispreferred forms,59,Contractions,1.8,0,10,3.1
+N,Reduced or dispreferred forms,60,ThatDeletion,2,0,9,2
+N,Reduced or dispreferred forms,61,StrandedPrepositions,0.5,0,3,0.8
+N,Reduced or dispreferred forms,62,SplitInfinitives,0,0,0,0
+N,Reduced or dispreferred forms,63,SplitAuxiliaries,5.4,1,10,2.2
+O,coordination,64,PhrasalCoordination,4.1,0,8,2
+O,coordination,65,NonPhrasalCoordination,2.3,0,6,1.7
+P,negation,66,SyntheticNegation,1.5,0,6,1.3
+P,negation,67,AnalyticNegation,4.7,0,9,2.2

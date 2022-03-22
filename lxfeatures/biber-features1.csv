@@ -1,0 +1,373 @@
+category_id,category,subcat,fid,feature,type,lemma,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,aboard,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,above,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,abroad,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,across,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,ahead,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,alongside,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,around,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,ashore,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,astern,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,away,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,behind,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,below,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,beneath,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,beside,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,downhill,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,downstairs,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,downstream,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,east,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,far,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,hereabouts,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,indoors,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,inland,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,inshore,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,inside,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,locally,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,near,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,nearby,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,north,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,nowhere,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,outdoors,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,outside,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,overboard,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,overland,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,overseas,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,south,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,underfoot,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,underground,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,underneath,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,uphill,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,upstream,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,upstairs,
+B,Place and time adverbials,,4,PlaceAdverbials,lemma,west,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,afterwards,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,again,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,earlier,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,early,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,eventually,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,formerly,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,immediately,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,initially,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,instantly,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,late,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,lately,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,later,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,momentarily,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,now,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,nowadays,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,once,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,originally,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,presently,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,previously,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,recently,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,shortly,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,simultaneously,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,soon,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,subsequently,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,today,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,tomorrow,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,tonight,
+B,Place and time adverbials,,5,TimeAdverbials,lemma,yesterday,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,i,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,me,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,we,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,us,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,my,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,our,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,myself,
+C,Pronouns and pro-verbs,personal pronouns,6,FirstPersonPronouns,lemma,ourselves,
+C,Pronouns and pro-verbs,personal pronouns,7,SecondPersonPronouns,lemma,you,
+C,Pronouns and pro-verbs,personal pronouns,7,SecondPersonPronouns,lemma,your,
+C,Pronouns and pro-verbs,personal pronouns,7,SecondPersonPronouns,lemma,yourself,
+C,Pronouns and pro-verbs,personal pronouns,7,SecondPersonPronouns,lemma,yourselves,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,she,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,he,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,they,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,her,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,him,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,them,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,his,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,their,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,himself,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,herself,
+C,Pronouns and pro-verbs,personal pronouns,8,ThirdPersonPronouns,lemma,themselves,
+C,Pronouns and pro-verbs,impersonal pronouns,9,PronounIT,lemma,it,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,anybody,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,anyone,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,anything,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,everybody,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,everyone,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,everything,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,nobody,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,none,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,nothing,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,nowhere,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,somebody,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,someone,
+C,Pronouns and pro-verbs,impersonal pronouns,11,IndefinitePronouns,lemma,something,
+H,Subordination features,adverbial clauses,35,AdvSubCause,lemma,because,
+H,Subordination features,adverbial clauses,36,AdvSubConcession,lemma,although,
+H,Subordination features,adverbial clauses,36,AdvSubConcession,lemma,though,
+H,Subordination features,adverbial clauses,37,AdvSubCondition,lemma,if,
+H,Subordination features,adverbial clauses,37,AdvSubCondition,lemma,unless,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,since,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,while,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,whereupon,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,whereas,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,whereby,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,such that,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,inasmuch as,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,forasmuch as,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,insofar as,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,insomuch as,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,as long as,
+H,Subordination features,adverbial clauses,38,AdvSubOther,lemma,as soon as,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,against,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,amid,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,amidst,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,among,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,amongst,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,at,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,besides,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,between,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,by,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,despite,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,during,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,except,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,for,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,from,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,in,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,into,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,minus,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,notwithstanding,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,of,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,off,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,on,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,onto,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,opposite,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,out,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,per,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,plus,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,pro,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,re,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,than,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,through,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,throughout,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,thru,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,to,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,toward,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,towards,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,upon,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,versus,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,via,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,with,
+I,Adjectives and adverbs,prepositional phrases,39,Prepositions,lemma,without,
+K,Specialized lexical classes,,45,Conjuncts,lemma,alternatively,
+K,Specialized lexical classes,,45,Conjuncts,lemma,altogether,
+K,Specialized lexical classes,,45,Conjuncts,lemma,consequently,
+K,Specialized lexical classes,,45,Conjuncts,lemma,conversely,
+K,Specialized lexical classes,,45,Conjuncts,lemma,eg,
+K,Specialized lexical classes,,45,Conjuncts,lemma,e.g.,
+K,Specialized lexical classes,,45,Conjuncts,lemma,else,
+K,Specialized lexical classes,,45,Conjuncts,lemma,furthermore,
+K,Specialized lexical classes,,45,Conjuncts,lemma,hence,
+K,Specialized lexical classes,,45,Conjuncts,lemma,however,
+K,Specialized lexical classes,,45,Conjuncts,lemma,i.e.,
+K,Specialized lexical classes,,45,Conjuncts,lemma,instead,
+K,Specialized lexical classes,,45,Conjuncts,lemma,likewise,
+K,Specialized lexical classes,,45,Conjuncts,lemma,moreover,
+K,Specialized lexical classes,,45,Conjuncts,lemma,namely,
+K,Specialized lexical classes,,45,Conjuncts,lemma,nevertheless,
+K,Specialized lexical classes,,45,Conjuncts,lemma,nonetheless,
+K,Specialized lexical classes,,45,Conjuncts,lemma,notwithstanding,
+K,Specialized lexical classes,,45,Conjuncts,lemma,otherwise,
+K,Specialized lexical classes,,45,Conjuncts,lemma,rather,
+K,Specialized lexical classes,,45,Conjuncts,lemma,similarly,
+K,Specialized lexical classes,,45,Conjuncts,lemma,therefore,
+K,Specialized lexical classes,,45,Conjuncts,lemma,thus,
+K,Specialized lexical classes,,45,Conjuncts,lemma,viz,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in comparison,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in contrast,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in particular,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in addition,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in conclusion,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in consequence,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in sum,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in summary,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in any event,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in any case,
+K,Specialized lexical classes,,45,Conjuncts,lemma,in other words,
+K,Specialized lexical classes,,45,Conjuncts,lemma,for example,
+K,Specialized lexical classes,,45,Conjuncts,lemma,for instance,
+K,Specialized lexical classes,,45,Conjuncts,lemma,by contrast,
+K,Specialized lexical classes,,45,Conjuncts,lemma,by comparison,
+K,Specialized lexical classes,,45,Conjuncts,lemma,as a result,
+K,Specialized lexical classes,,45,Conjuncts,lemma,as a consequence,
+K,Specialized lexical classes,,45,Conjuncts,lemma,on the contrary,
+K,Specialized lexical classes,,45,Conjuncts,lemma,on the other hand,
+K,Specialized lexical classes,,46,Downtoners,lemma,almost,
+K,Specialized lexical classes,,46,Downtoners,lemma,barely,
+K,Specialized lexical classes,,46,Downtoners,lemma,hardly,
+K,Specialized lexical classes,,46,Downtoners,lemma,merely,
+K,Specialized lexical classes,,46,Downtoners,lemma,mildly,
+K,Specialized lexical classes,,46,Downtoners,lemma,nearly,
+K,Specialized lexical classes,,46,Downtoners,lemma,only,
+K,Specialized lexical classes,,46,Downtoners,lemma,partially,
+K,Specialized lexical classes,,46,Downtoners,lemma,partly,
+K,Specialized lexical classes,,46,Downtoners,lemma,practically,
+K,Specialized lexical classes,,46,Downtoners,lemma,scarcely,
+K,Specialized lexical classes,,46,Downtoners,lemma,slightly,
+K,Specialized lexical classes,,46,Downtoners,lemma,somewhat,
+K,Specialized lexical classes,,48,Amplifiers,lemma,absolutely,
+K,Specialized lexical classes,,48,Amplifiers,lemma,altogether,
+K,Specialized lexical classes,,48,Amplifiers,lemma,completely,
+K,Specialized lexical classes,,48,Amplifiers,lemma,enormously,
+K,Specialized lexical classes,,48,Amplifiers,lemma,entirely,
+K,Specialized lexical classes,,48,Amplifiers,lemma,extremely,
+K,Specialized lexical classes,,48,Amplifiers,lemma,fully,
+K,Specialized lexical classes,,48,Amplifiers,lemma,greatly,
+K,Specialized lexical classes,,48,Amplifiers,lemma,highly,
+K,Specialized lexical classes,,48,Amplifiers,lemma,intensely,
+K,Specialized lexical classes,,48,Amplifiers,lemma,perfectly,
+K,Specialized lexical classes,,48,Amplifiers,lemma,strongly,
+K,Specialized lexical classes,,48,Amplifiers,lemma,thoroughly,
+K,Specialized lexical classes,,48,Amplifiers,lemma,totally,
+K,Specialized lexical classes,,48,Amplifiers,lemma,utterly,
+K,Specialized lexical classes,,48,Amplifiers,lemma,very,
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,acknowledge,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,admit,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,agree,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,assert,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,claim,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,complain,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,declare,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,deny,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,explain,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,hint,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,insist,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,mention,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,proclaim,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,promise,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,protest,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,remark,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,reply,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,report,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,say,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,suggest,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,swear,penntree
+M,Specialized verb classes,,55,PublicVerbs,lemma_pos,write,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,anticipate,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,assume,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,believe,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,conclude,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,decide,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,demonstrate,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,determine,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,discover,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,doubt,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,estimate,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,fear,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,feel,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,find,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,forget,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,guess,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,hear,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,hope,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,imagine,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,imply,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,indicate,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,infer,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,know,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,learn,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,mean,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,notice,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,prove,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,realize,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,recognize,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,remember,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,reveal,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,see,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,show,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,suppose,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,think,penntree
+M,Specialized verb classes,,56,PrivateVerbs,lemma_pos,understand,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,agree,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,arrange,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,ask,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,beg,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,command,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,decide,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,demand,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,grant,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,insist,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,instruct,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,ordain,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,pledge,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,pronounce,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,propose,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,recommend,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,request,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,stipulate,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,suggest,penntree
+M,Specialized verb classes,,57,SuasiveVerbs,lemma_pos,urge,penntree
+M,Specialized verb classes,,58,SeemVerbs,lemma_pos,seem,penntree
+M,Specialized verb classes,,58,SeemVerbs,lemma_pos,appear,penntree
+L,Modals,,52,PossibilityModals,lemma_pos,can,penntree
+L,Modals,,52,PossibilityModals,lemma_pos,may,penntree
+L,Modals,,52,PossibilityModals,lemma_pos,might,penntree
+L,Modals,,52,PossibilityModals,lemma_pos,could,penntree
+L,Modals,,53,NecessityModals,lemma_pos,ought,penntree
+L,Modals,,53,NecessityModals,lemma_pos,should,penntree
+L,Modals,,53,NecessityModals,lemma_pos,must,penntree
+L,Modals,,54,PredictiveModals,lemma_pos,will,penntree
+L,Modals,,54,PredictiveModals,lemma_pos,would,penntree
+L,Modals,,54,PredictiveModals,lemma_pos,shall,penntree
+P,negation,,67,AnalyticNegation,grep,not,
+K,Specialized lexical classes,,51,Demonstratives,lemma_pos,that,upos
+K,Specialized lexical classes,,51,Demonstratives,lemma_pos,this,upos
+K,Specialized lexical classes,,51,Demonstratives,lemma_pos,these,upos
+K,Specialized lexical classes,,51,Demonstratives,lemma_pos,those,upos
+A,Tense and aspect markers,,1,PastTense,pos,,
+A,Tense and aspect markers,,3,PresentTense,pos,,
+E,Nominal forms,,16,Nouns,pos,,
+I,Adjectives and adverbs,adjectives and adverbs,42,Adverbs,pos,,
+E,Nominal forms,,14,Nominalizations,form_pos,,
+E,Nominal forms,,15,Gerunds,form_pos,,
+N,Reduced or dispreferred forms,,59,Contractions,form_pos,,
+A,Tense and aspect markers,,2,PerfectAspectVerbs,gram,,
+C,Pronouns and pro-verbs,impersonal pronouns,10,DemonstrativePronouns,gram,,
+C,Pronouns and pro-verbs,PRO-VERBS,12,DoProVerb,gram,,
+D,questions,,13,WhQuestions,gram,,
+F,passives,,17,AgentlessPassives,gram,,
+F,passives,,18,ByPassives,gram,,
+G,stative forms,,19,BeMainVerb,gram,,
+G,stative forms,,20,ExistentialThere,gram,,
+H,Subordination features,complementation,21,ThatVerbCompliments,gram,,
+H,Subordination features,complementation,22,ThatAdjCompliments,gram,,
+H,Subordination features,complementation,23,WhClauses,gram,,
+H,Subordination features,complementation,24,Infinitives,pos,,
+H,Subordination features,relatives,29,ThatRelativesSbj,gram,,
+H,Subordination features,relatives,30,ThatRelativesObj,gram,,
+H,Subordination features,relatives,31,WhRelativesSbj,gram,,
+H,Subordination features,relatives,32,WhRelativesObj,gram,,
+H,Subordination features,relatives,33,WhRelativesPiedPipe,gram,,
+H,Subordination features,relatives,34,SentenceRelatives,gram,,
+I,Adjectives and adverbs,adjectives and adverbs,40,AttributiveAdjectives,gram,,
+I,Adjectives and adverbs,adjectives and adverbs,41,PredicativeAdjectives,gram,,
+N,Reduced or dispreferred forms,,60,ThatDeletion,gram,,
+N,Reduced or dispreferred forms,,61,StrandedPrepositions,gram,,
+N,Reduced or dispreferred forms,,62,SplitInfinitives,gram,,
+N,Reduced or dispreferred forms,,63,SplitAuxiliaries,gram,,
+O,coordination,,64,PhrasalCoordination,Lexico-gram,,
+O,coordination,,65,NonPhrasalCoordination,Lexico-gram,,
+P,negation,,66,SyntheticNegation,Lexico-gram,,
+J,Lexical specificity,,43,TypeTokenRatio,TEXT,,
+J,Lexical specificity,,44,WordLength,TEXT,,
+K,Specialized lexical classes,,47,Hedges,Not-included,,
+K,Specialized lexical classes,,49,Emphatics,Not-included,,
+K,Specialized lexical classes,,50,DiscourseParticles,Not-included,,
+H,Subordination features,participle forms,25,PresentParticipleClauses,Not-included,,
+H,Subordination features,participle forms,26,PastParticipleClauses,Not-included,,
+H,Subordination features,participle forms,27,PastPartWhizDeletions,Not-included,,
+H,Subordination features,participle forms,28,PresentPartWhizDeletions,Not-included,,

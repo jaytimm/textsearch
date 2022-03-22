@@ -7,10 +7,8 @@ output:
 
 # textsearch
 
-A simple framework for searching corpora for lexical & grammatical patterns in context.  At present, functions facilitate two types of search: (1) TIF search, ie, raw, un-annotated text search, and (2) annotated corpus search.  
+A simple framework for searching corpora for text patterns in context.  At present, functions facilitate two types of search: (1) TIF (ie, raw text) search for lexical patterns in context, and (2) annotated corpus search for lexico-grammatical patterns in (sentential) context.  
 
-
-For dependency-based search, see [this lovely package]().
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -73,7 +71,7 @@ list(Date = tif$date[1],
 
 
 
-### Queries
+### Extract lexical patterns
 
 ```{r}
 parts <- '\\bpart[a-z]*\\b'
@@ -139,23 +137,12 @@ strwrap(inline_tif$text[1], width = 60)[1:5]
 ```
 
 
-### Build inline query 
+### Extract lexico-grammatical constructions 
 
 ```{r}
-search <- textsearch::translate_query(
-  x = '(is|was) (ADV)* VBN by',
-  mapping = textsearch::mapping_generic)
-
-search
-```
-
-
-
-
-### Identify/extract grammatical constructions 
-
-```{r}
-found <- textsearch::find_gramx(tif = inline_tif, query = search)
+found <- textsearch::find_gramx(search = '(is|was) (ADV)* VBN by',
+                                tif = inline_tif,
+                                mapping = textsearch::mapping_generic)
 
 found %>% slice(3:9) %>% knitr::kable()
 ```
@@ -183,12 +170,12 @@ f_sentence %>% sample_n(5) %>% knitr::kable()
 ```{r}
 new_annotation <- textsearch::recode_gramx(df = annotation,
                                            gramx = found,
+                                           
                                            form = 'token', 
                                            tag = 'xpos',
                                            
-                                           col = 'xpos',
-                                           new_cat = 'by_passive',
-                                           renumber = T)
+                                           recode_col = 'xpos',
+                                           recode_cat = 'by_passive')
 ```
 
 

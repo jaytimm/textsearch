@@ -1,11 +1,9 @@
 # textsearch
 
-A simple framework for searching corpora for lexical & grammatical
-patterns in context. At present, functions facilitate two types of
-search: (1) TIF search, ie, raw, un-annotated text search, and (2)
-annotated corpus search.
-
-For dependency-based search, see [this lovely package]().
+A simple framework for searching corpora for text patterns in context.
+At present, functions facilitate two types of search: (1) TIF (ie, raw
+text) search for lexical patterns in context, and (2) annotated corpus
+search for lexico-grammatical patterns in (sentential) context.
 
 ## Installation
 
@@ -38,22 +36,22 @@ list(Date = tif$date[1],
 ```
 
     ## $Date
-    ## [1] "2022-02-23"
+    ## [1] "2022-03-21"
     ## 
     ## $Source
-    ## [1] "Chinadaily USA"
+    ## [1] "ArtReview"
     ## 
     ## $Title
-    ## [1] "50 years after Nixon's visit, time for kung fu diplomacy"
+    ## [1] "Why the Artworld Must Stand with Palestine"
     ## 
     ## $Article
-    ## [1] "Fifty years ago on February 21, 1972, then-US president"  
-    ## [2] "Richard Nixon arrived in Beijing, breaking the ice of the"
-    ## [3] "Cold War. By 1979 formal relations were established. A"   
-    ## [4] "honeymoon era of China-US relations began paralleling"    
-    ## [5] "China's policies of opening its economy and encouraging"
+    ## [1] "At the Academy Awards in 1999, Elia Kazan received an"     
+    ## [2] "honorary Oscar in recognition of his profound contribution"
+    ## [3] "to cinema. As a director, Kazan often broached the brutal" 
+    ## [4] "social realities of postwar America – his films narrated"  
+    ## [5] "the era’s complex conditions, relations and struggles that"
 
-### Queries
+### Extract lexical patterns
 
 ``` r
 parts <- '\\bpart[a-z]*\\b'
@@ -71,11 +69,11 @@ textsearch::find_lex(query = pols,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern             | context                                                                                                                                                                                                                                                      |
-|:-------|----:|:--------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1      |   1 | political system    | thinking of Washington DC politicians. The idea of accepting another viewpoint, much less another economic or `political system` , is intolerable among Washington elites. Today intolerance is deeply imbedded in both Washington’s international relations |
-| 1      |   2 | political divisions | Today intolerance is deeply imbedded in both Washington’s international relations and own domestic party politics, where `political divisions` are stark and ideology itself is split along sharp lines of incompatible duality. At a level                  |
-| 1      |   3 | political ideology  | and ideology itself is split along sharp lines of incompatible duality. At a level deeper than `political ideology` is philosophy. Among the Washington elite, it is all about opposites, polarities, exclusion, expulsion, and conflicting                  |
+| doc_id |  id | pattern            | context                                                                                                                                                                                                                                       |
+|:-------|----:|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1      |   1 | political ideology | Communist Party USA, or for being communist sympathisers. From official literature to the popular press, such `political ideology` was relentlessly depicted as dangerous. And this campaign of leftist suppression never really ended; it is |
+| 1      |   2 | political scandal  | noxious atmosphere around expressions of solidarity with Palestine means that an anonymous blog can incite a `political scandal` all the way up to the German minister of culture, spurring reactionary op-eds in respected newspapers,       |
+| 2      |   3 | political ideology | The military unit has and/or previously had ties to far-right `political ideology` . Whether or not Russia is battling Nazism, as claimed by Putin, its bombs, missiles, mortars                                                              |
 
 ``` r
 set.seed(99)
@@ -88,11 +86,11 @@ textsearch::find_lex(query = parts,
   knitr::kable(escape = F)
 ```
 
-| doc_id |  id | pattern | context                                                                                                                                                                                                                                            |
-|:-------|----:|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 93     | 432 | Party   | territorial and federal governments march further and faster down the road to full authoritarianism, Yukon Freedom `Party` thinks it is time to check in with Yukoners directly,” a news release from the party                                    |
-| 55     | 289 | Parti   | state seats that Opposition parties are defending, which technically excluded Larkin as its incumbent was from `Parti` Pribumi Bersatu Malaysia (Bersatu). Shortly after Muda’s announcement yesterday, however, deputy Johor PKR chief Jimmy Puah |
-| 57     | 300 | part    | my family have collected memorabilia, from major sports teams to the American armed forces. It was `part` of the culture I grew up around, especially with my grandfather who was a Civil War                                                      |
+| doc_id |  id | pattern  | context                                                                                                                                                                                                                      |
+|:-------|----:|:---------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 80     | 432 | partisan | defining partisanship encourages rather than prevents senators from giving their own spin on what counts as `partisan` . “In fact, I think more words on the page means there’s a little bit more                            |
+| 53     | 289 | part     | is evangelicalism in the United States today? One place to begin is historian David Bebbington’s four- `part` definition of evangelicalism. In his 1989 book, Bebbington argued that evangelicals share a recognition of the |
+| 54     | 300 | Party    | acted as a political ally to the liberals and the Catholics.” During the 1920s the Liberal `Party` relied on political alliances in order to gain a majority in parliament. “The choice was between                          |
 
 ## Annotated corpus search
 
@@ -118,41 +116,31 @@ inline_tif <- textsearch::build_inline(df = annotation,
 strwrap(inline_tif$text[1], width = 60)[1:5]
 ```
 
-    ## [1] "CD~Fifty NNS~years RB~ago IN~on NNP~February CD~21 ,~,"    
-    ## [2] "CD~1972 ,~, CC~then-US NNP~president NNP~Richard NNP~Nixon"
-    ## [3] "VBD~arrived IN~in NNP~Beijing ,~, VBG~breaking DT~the"     
-    ## [4] "NN~ice IN~of DT~the NNP~Cold NNP~War .~. IN~By CD~1979"    
-    ## [5] "JJ~formal NNS~relations VBD~were VBN~established .~. DT~A"
+    ## [1] "At/IN the/DT Academy/NNP Awards/NNP in/IN 1999/CD ,/,"     
+    ## [2] "Elia/NNP Kazan/NNP received/VBD an/DT honorary/JJ Oscar/NN"
+    ## [3] "in/IN recognition/NN of/IN his/PRP$ profound/JJ"           
+    ## [4] "contribution/NN to/IN cinema/NN ./. As/IN a/DT director/NN"
+    ## [5] ",/, Kazan/NNP often/RB broached/VBD the/DT brutal/JJ"
 
-### Build inline query
-
-``` r
-search <- textsearch::translate_query(
-  x = '(is|was) (ADV)* VBN by',
-  mapping = textsearch::mapping_generic)
-
-search
-```
-
-    ## [1] "\\S+~(is|was) (RB~\\S+ |RBR~\\S+ |RBS~\\S+ )*VBN~\\S+ \\S+~by "
-
-### Identify/extract grammatical constructions
+### Extract lexico-grammatical constructions
 
 ``` r
-found <- textsearch::find_gramx(tif = inline_tif, query = search)
+found <- textsearch::find_gramx(search = '(is|was) (ADV)* VBN by',
+                                tif = inline_tif,
+                                mapping = textsearch::mapping_generic)
 
 found %>% slice(3:9) %>% knitr::kable()
 ```
 
-| doc_id | construction                          | start |   end |
-|:-------|:--------------------------------------|------:|------:|
-| 5      | VBD\~was VBN\~murdered IN\~by         | 23938 | 23964 |
-| 8      | VBD\~was VBN\~officiated IN\~by       | 19503 | 19531 |
-| 9      | VBD\~was VBN\~required IN\~by         |  8182 |  8208 |
-| 9      | VBD\~was VBN\~driven IN\~by           | 14181 | 14205 |
-| 9      | VBD\~was RB\~all VBN\~designed IN\~by | 16287 | 16320 |
-| 12     | VBZ\~is VBN\~guided IN\~by            |  2962 |  2985 |
-| 13     | VBZ\~is VBN\~controlled IN\~by        | 12602 | 12629 |
+| doc_id | construction                               | start |   end |
+|:-------|:-------------------------------------------|------:|------:|
+| 5      | was/VBD issued/VBN by/IN                   | 11804 | 11828 |
+| 5      | was/VBD not/RB founded/VBN by/IN           | 20977 | 21009 |
+| 5      | was/VBD regularly/RB used/VBN by/IN        | 22728 | 22763 |
+| 5      | was/VBD successfully/RB co-opted/VBN by/IN | 23576 | 23618 |
+| 7      | is/VBZ sponsored/VBN by/IN                 |  3287 |  3313 |
+| 7      | was/VBD escorted/VBN by/IN                 |  8210 |  8236 |
+| 7      | was/VBD enchanted/VBN by/IN                | 13482 | 13509 |
 
 ### Add sentential context
 
@@ -167,25 +155,25 @@ set.seed(99)
 f_sentence %>% sample_n(5) %>% knitr::kable()
 ```
 
-| doc_id | sentence_id | construction                              | text                                                                                                                                                                                                                                                                                                                                                                                          |
-|:-------|------------:|:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 90     |           6 | VBD\~was RB\~also VBN\~celebrated IN\~by  | Despite being harshly criticized by certain sectors , the politician and economist negotiated the end of the guerrilla groups that plagued his country for more than half a century and achieved an agreement , that was not only acclaimed with his receiving the 2016 Nobel Peace Prize , but `was also celebrated by` Pope Francis in his Apostolic Visit to Colombia the following year . |
-| 62     |           7 | VBD\~was VBN\~given IN\~by                | The lie `was given by` those in the East German government that the Wall was meant not keep people in , but to keep the taint of Western democracy out , even as guns and binoculars , spies and informants were turned on their own people .                                                                                                                                                 |
-| 76     |          42 | VBD\~was VBN\~authored IN\~by             | The study , “ The Role of Anti-Establishment Orientations During the Trump Presidency “ , `was authored by` Adam M. Enders and Joseph E. Uscinski .                                                                                                                                                                                                                                           |
-| 48     |           3 | VBZ\~is RB\~often VBN\~perpetuated IN\~by | Critical race theory argues that racism is a part of everyday life and `is often perpetuated by` legal policies and practices .                                                                                                                                                                                                                                                               |
-| 68     |           1 | VBZ\~is VBN\~seen IN\~by                  | The judge `is seen by` some as a long shot for the Supreme Court , but supporters say her bipartisan backing and the appeal of her humble ascent should not be overlooked .                                                                                                                                                                                                                   |
+| doc_id | sentence_id | construction                  | text                                                                                                                                                                                                                                                                                                                            |
+|:-------|------------:|:------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 72     |          41 | was/VBD authored/VBN by/IN    | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , was authored by Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi . |
+| 46     |          18 | was/VBD implemented/VBN by/IN | A new Household Pulse Survey was implemented by the Census Bureau during COVID-19 and contains rich questions on COVID-19 vaccination but does not ask about party identification .                                                                                                                                             |
+| 67     |          17 | is/VBZ paid/VBN by/IN         | The teacher is paid by the union and the district is reimbursed for any administrative costs the employee accrues .                                                                                                                                                                                                             |
+| 23     |         177 | is/VBZ espoused/VBN by/IN     | What would you say is the actual content of the ideology that is espoused by the Chinese party-state in recent years ?                                                                                                                                                                                                          |
+| 84     |          34 | was/VBD revealed/VBN by/IN    | The state’s exclusionary purpose and effect was revealed by the map .                                                                                                                                                                                                                                                           |
 
 ### Recode construction
 
 ``` r
 new_annotation <- textsearch::recode_gramx(df = annotation,
                                            gramx = found,
+                                           
                                            form = 'token', 
                                            tag = 'xpos',
                                            
-                                           col = 'xpos',
-                                           new_cat = 'by_passive',
-                                           renumber = T)
+                                           recode_col = 'xpos',
+                                           recode_cat = 'by_passive')
 ```
 
 ``` r
@@ -201,12 +189,12 @@ new_annotation %>%
   knitr::kable()
 ```
 
-| doc_id | sentence_id | example                                                                                                                                                                                                                                                                                                                           |
-|:-------|------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 82     |          55 | But this `is_counterbalanced_by` perhaps the worst point in Rick Scott’s 60-page agenda : “ All Americans should pay some income tax to have skin in the game , even if a small amount .                                                                                                                                          |
-| 69     |          45 | In San Francisco , Mr. Boudin argued that the effort to recall him `was_fueled_by` politics , not voters ’ worries about crime .                                                                                                                                                                                                  |
-| 76     |          41 | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , `was_authored_by` Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi . |
-| 68     |          43 | Her experience as a trial judge `is_also_cited_by` her supporters as an asset .                                                                                                                                                                                                                                                   |
-| 33     |          39 | As vice president , he became Jackson’s heir apparent , and with Old Hickory’s blessing , he `was_nominated_by` the Democratic Party to be the next president of the United States .                                                                                                                                              |
+| doc_id | sentence_id | example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|:-------|------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 67     |          17 | The teacher `is_paid_by` the union and the district is reimbursed for any administrative costs the employee accrues .                                                                                                                                                                                                                                                                                                                                                                                             |
+| 72     |          41 | The study , “ American Politics in Two Dimensions : Partisan and Ideological Identities versus Anti-Establishment Orientations “ , `was_authored_by` Joseph E. Uscinski , Adam M. Enders , Michelle I. Seelig , Casey A. Klofstad , John R. Funchion , Caleb Everett , Stefan Wuchty , Kamal Premaratne , and Manohar N. Murthi .                                                                                                                                                                                 |
+| 67     |          16 | There have been some cases where a teacher `is_temporarily_hired_by` a union and allowed to work from their school building .                                                                                                                                                                                                                                                                                                                                                                                     |
+| 7      |          31 | For all the whining they do about cancel culture , republicans invented cancel culture . conservatives try to “ cancel ” people and institutions they disagree with all the time : Nike , Target , Dixie Chicks , NASCAR , keurig , Gillette , and French fries , a tall , yellow bird , mental health programs in schools , and books like “ The Story of Ruby Ridges , ” the true story of a 6-year-old who `was_escorted_by` federal marshals past a vicious white mob to desegregate her New Orleans school . |
+| 58     |          32 | This compassionate non-violent response `was_also_taught_by` the Buddha 600 years prior to Christ ; in fact Buddhism , like Jainism , rejects any type of violence to all forms of life .                                                                                                                                                                                                                                                                                                                         |
 
 ## Summary

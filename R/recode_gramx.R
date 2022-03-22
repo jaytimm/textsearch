@@ -3,9 +3,8 @@
 #' @name recode_gramx
 #' @param df An annotated corpus df
 #' @param gramx A DF
-#' @param col A string
-#' @param new_cat A string
-#' @param renumber A boolean
+#' @param recode_col A string
+#' @param recode_cat A string
 #' @return A data frame
 #'
 #' @export
@@ -16,9 +15,8 @@ recode_gramx <- function(gramx,
                          df,
                          form = 'token',
                          tag = 'xpos',
-                         col = 'xpos',
-                         new_cat = 'cx1',
-                         renumber = T){
+                         recode_col = 'xpos',
+                         recode_cat = 'cx1'){
 
   ## build new char onset/offset per inline --
   ## in order to align with gramx onset/offests --
@@ -44,7 +42,7 @@ recode_gramx <- function(gramx,
   f100 <- f10[f10[, .I[1], list (doc_id, term_id2)]$V1]
 
   ## Re-assign token and lemma columns -
-  f100[, (col) := ifelse(!is.na(construction), new_cat, get(col))]
+  f100[, (recode_col) := ifelse(!is.na(construction), recode_cat, get(recode_col))]
 
   ## Re-number
   f100[, term_id := seq_len(.N), by = doc_id]
@@ -55,23 +53,28 @@ recode_gramx <- function(gramx,
   # x3[, pattern := trimws(gsub('[A-Z]+_', '', construction))]
   f100[, token := ifelse(!is.na(construction),
                          gsub(' ', '_',
-                              trimws(gsub('[A-Z_]+~', '', construction))
+                              trimws(gsub('/[A-Z_]+', '', construction))
                               ),
                          token)]
   f100[, lemma := ifelse(!is.na(construction), token, lemma)]
+  f100[, feats := ifelse(!is.na(construction), NA, feats)]
 
 
   ## Re-do start/stop based on new concatenated forms --
   f100[, end := cumsum(nchar(inline)), by = list(doc_id)]
-  df[, start := c(1, end[1:(length(end)-1)] + 1),
-     by = list(doc_id)]
+  f100[, start := c(1, end[1:(length(end)-1)] + 1),
+       by = list(doc_id)]
 
   ## Remove derived columns --
-
-  # [1] "doc_id"      "sentence_id" "start"       "end"
-  # [5] "term_id"     "token_id"    "token"       "lemma"
-  # [9] "upos"        "xpos"
-
-  ## return
-  return(f100)
+  f100[, c("doc_id",
+           "sentence_id",
+           "start",
+           "end",
+           "term_id",
+           "token_id",
+           "token",
+           "lemma",
+           "upos",
+           "xpos",
+           "feats")]
 }
